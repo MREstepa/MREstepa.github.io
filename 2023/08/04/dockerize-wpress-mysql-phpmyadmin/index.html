@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="A collection of my programming notes for everybody's reference">
+    <meta name="keywords" content="Python, Django, Git">
+    <meta name="theme-color" content="#000000">
+
+    <meta property="og:title"
+        content="Dockerized Wordpress, MySQL, and phpmyadmin with environment variables - Programming Notes">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="This document is a guide for spinning up a dockerized wordpress, mysql, and phpmyadmin application.
+">
+    
+    <meta property="article:published_time" content=" 2023-08-04T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ray">
+    
+    
+    <meta property="article:tag" content="Docker">
+    
+    <meta property="article:tag" content="Wordpress">
+    
+    
+    <meta property="og:image" content="https://github.com/mrestepa.png">
+    <meta property="og:url" content="/2023/08/04/dockerize-wpress-mysql-phpmyadmin/">
+    <meta property="og:site_name" content="Programming Notes">
+
+    <title>Dockerized Wordpress, MySQL, and phpmyadmin with environment variables - Programming Notes</title>
+
+    
+    <link rel="shortcut icon" href="mrestepa.github.io/img/favicon.ico">
+    <link rel="canonical" href="mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/">
+    <link rel="stylesheet" href="mrestepa.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="mrestepa.github.io/css/custom.min.css">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
+    <script></script>
+</head>
+
+
+<body ontouchstart="">
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="mrestepa.github.io/index.html/">Programming Notes</a>
+            </div>
+
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="mrestepa.github.io/index.html/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="mrestepa.github.io/about/index.html">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="mrestepa.github.io/archive/index.html">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                setTimeout(function () {
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('mrestepa.github.io/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+
+
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="mrestepa.github.io/archive/index.html?tag=Docker" title="Docker">Docker</a>
+                        
+                        <a class="tag" href="mrestepa.github.io/archive/index.html?tag=Wordpress" title="Wordpress">Wordpress</a>
+                        
+                    </div>
+                    <h1>Dockerized Wordpress, MySQL, and phpmyadmin with environment variables</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Ray on August 4, 2023</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+				<p>This document is a guide for spinning up a dockerized wordpress, mysql, and phpmyadmin application.</p>
+
+<h2 id="pre-requisites">Pre-requisites</h2>
+<ol>
+  <li>Docker &amp; Docker Compose</li>
+</ol>
+
+<h2 id="creating-docker-composeyml-file">Creating docker-compose.yml file</h2>
+
+<ol>
+  <li>Create and navigate to your project directory.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">mkdir </span>your_project_name
+<span class="nv">$ </span><span class="nb">cd </span>your_project_name
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/navigate_to_project_dir.png" alt="navigate_to_project_dir" /></p>
+  </li>
+  <li>Create a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>nano docker-compose.yml
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Paste the following code into the newly created <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file. Each line is explained by an inline comment, which can be removed. Replace <code class="language-plaintext highlighter-rouge">your_project_name</code>, <code class="language-plaintext highlighter-rouge">your_mysql_version</code>, <code class="language-plaintext highlighter-rouge">your_phpmyadmin_version</code>, and <code class="language-plaintext highlighter-rouge">your_wordpress_version</code> with your project’s name, preferred mysql version, preferred phpmyadmin version, and preferred wordpress version, respectively</li>
+</ol>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+</pre></td><td class="rouge-code"><pre><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+
+<span class="na">services</span><span class="pi">:</span>
+  <span class="c1"># Database</span>
+  <span class="na">db</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">your_project_name_db</span>  <span class="c1"># database container name</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">mysql:your_mysql_version</span>  <span class="c1"># project mysql version. ex: mysql:8.0.33</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">./db_data/:/var/lib/mysql</span>  <span class="c1"># database files mounted to ./db_data directory</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">MYSQL_TCP_PORT</span><span class="pi">:</span> <span class="s">${MYSQL_TCP_PORT}</span>  <span class="c1"># port in which mysql will run on</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">${MYSQL_ROOT_PASSWORD}</span>  <span class="c1"># mysql root password</span>
+      <span class="na">MYSQL_DATABASE</span><span class="pi">:</span> <span class="s">${MYSQL_DATABASE}</span>  <span class="c1"># your project's database name</span>
+      <span class="na">MYSQL_USER</span><span class="pi">:</span> <span class="s">${MYSQL_USER}</span>  <span class="c1"># your project's database username</span>
+      <span class="na">MYSQL_PASSWORD</span><span class="pi">:</span> <span class="s">${MYSQL_PASSWORD}</span>  <span class="c1"># your project's database password</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">your_project_namewp</span>
+  <span class="c1"># phpmyadmin</span>
+  <span class="na">phpmyadmin</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">your_project_name_phpmyadmin</span>  <span class="c1"># phpmyadmin container name</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">phpmyadmin:your_phpmyadmin_version</span>  <span class="c1"># your phpmyadmin version. ex: phpmyadmin:5.2.1</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">${PHPMYADMIN_PORT}:80'</span>  <span class="c1"># port in which phpmyadmin will run on</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">PMA_HOST</span><span class="pi">:</span> <span class="s">db:${MYSQL_TCP_PORT}</span>  <span class="c1"># phpmyadmin host</span>
+      <span class="na">MYSQL_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">${MYSQL_ROOT_PASSWORD}</span>  <span class="c1"># should have the same value as MYSQL_ROOT_PASSWORD in db container</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">your_project_namewp</span>
+  <span class="c1"># Wordpress</span>
+  <span class="na">wordpress</span><span class="pi">:</span>
+    <span class="na">container_name</span><span class="pi">:</span> <span class="s">your_project_name_wp</span>  <span class="c1"># project's wordpress container</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">db</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">wordpress:your_wordpress_version</span>  <span class="c1"># your wordpress version. ex: wordpress:6.1.1</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">${WORDPRESS_PORT}:80'</span>  <span class="c1"># port in which wordpress will run on</span>
+    <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
+    <span class="na">volumes</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">./src/:/var/www/html'</span><span class="pi">]</span>  <span class="c1"># wordpress files mounted to ./src directory</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="na">WORDPRESS_DEBUG</span><span class="pi">:</span> <span class="s">${WORDPRESS_DEBUG}</span>  <span class="c1"># debug mode</span>
+      <span class="na">WORDPRESS_DB_HOST</span><span class="pi">:</span> <span class="s">db:${MYSQL_TCP_PORT}</span>
+      <span class="na">WORDPRESS_DB_USER</span><span class="pi">:</span> <span class="s">${MYSQL_USER}</span>  <span class="c1"># should have the same value as MYSQL_USER env in db container</span>
+      <span class="na">WORDPRESS_DB_PASSWORD</span><span class="pi">:</span> <span class="s">${MYSQL_PASSWORD}</span>  <span class="c1"># should have the same value as MYSQL_PASSWORD env in db container</span>
+    <span class="na">networks</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">your_project_namewp</span>
+<span class="na">networks</span><span class="pi">:</span>
+  <span class="na">your_project_namewp</span><span class="pi">:</span>
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">db_data</span><span class="pi">:</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/creating_dockercompose_yml.png" alt="creating_dockercompose_yml" /></p>
+
+<h2 id="creating-env-file">Creating .env file</h2>
+
+<ol>
+  <li>Create a <code class="language-plaintext highlighter-rouge">.env</code> file to store environment variables
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>nano .env
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Paste and configure the following values
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>your_mysql_root_password
+<span class="nv">MYSQL_DATABASE</span><span class="o">=</span>wordpress
+<span class="nv">MYSQL_USER</span><span class="o">=</span>your_mysql_username
+<span class="nv">MYSQL_PASSWORD</span><span class="o">=</span>your_mysql_password
+<span class="nv">MYSQL_TCP_PORT</span><span class="o">=</span>3306
+<span class="nv">PHPMYADMIN_PORT</span><span class="o">=</span>8080
+<span class="nv">WORDPRESS_PORT</span><span class="o">=</span>8000
+<span class="nv">WORDPRESS_DEBUG</span><span class="o">=[</span><span class="nb">true</span> | <span class="nb">false</span><span class="o">]</span>  <span class="c"># set to true if development, false if production</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/creating_env.png" alt="creating_env_yml" /></p>
+  </li>
+  <li>Verify configuration. All environment variables should be filled with their true values.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>docker-compose config
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/verify_config.png" alt="verify_config_yml" /></p>
+  </li>
+</ol>
+
+<h2 id="building-the-wordpress-application">Building the wordpress application</h2>
+
+<ol>
+  <li>Build and run the containers. The <code class="language-plaintext highlighter-rouge">./db_data</code> directory will contain the database files, and the <code class="language-plaintext highlighter-rouge">./src</code> directory will contain your wordpress source codes.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>docker-compose up <span class="nt">--build</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/build_container.png" alt="build_container" /></p>
+  </li>
+  <li>
+    <p>Using your browser, navigate to localhost:your_wordpress_port and continue with your website setup
+<img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/local_wordpress.png" alt="local_wordpress" /></p>
+  </li>
+  <li>Using your browser, navigate to localhost:your_phpmyadmin_port for the phpmyadmin dashboard. You should be able to login using <code class="language-plaintext highlighter-rouge">root</code> as the username, and your <code class="language-plaintext highlighter-rouge">MYSQL_ROOT_PASSWORD</code> password found on the <code class="language-plaintext highlighter-rouge">.env</code> file.
+<img src="/img/in-post/dockerize-wpress-mysql-phpmyadmin/phpmyadmin.png" alt="phpmyadmin" /></li>
+</ol>
+
+<p>Done!</p>
+
+<p>*** To spin up multiple dockerized applications on a single host (separate wordpress, database, and phpmyadmins per project), use different port configuration for each project. Example, <code class="language-plaintext highlighter-rouge">proj1</code> should use <code class="language-plaintext highlighter-rouge">MYSQL_TCP_PORT=3306</code>, <code class="language-plaintext highlighter-rouge">PHPMYADMIN_PORT=8080</code>, and <code class="language-plaintext highlighter-rouge">WORDPRESS_PORT=8000</code>, while <code class="language-plaintext highlighter-rouge">proj2</code> should use <code class="language-plaintext highlighter-rouge">MYSQL_TCP_PORT=3307</code>, <code class="language-plaintext highlighter-rouge">PHPMYADMIN_PORT=8081</code>, and <code class="language-plaintext highlighter-rouge">WORDPRESS_PORT=8001</code>.</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/index.html" data-toggle="tooltip" data-placement="top" title="How To Install docker and docker-compose in Ubuntu Server">
+                        Previous<br>
+                        <span>How To Install docker and docker-compose in Ubuntu Server</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/index.html" data-toggle="tooltip" data-placement="top" title="Migrate Existing Wordpress Website to a Docker Container">
+                        Next<br>
+                        <span>Migrate Existing Wordpress Website to a Docker Container</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+            </div>  
+
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="mrestepa.github.io/archive/index.html">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0007" 
+                    href="mrestepa.github.io/archive/index.html?tag=Docker"
+                    title="Docker"
+                    rel="5">Docker</a>
+        
+                <a data-sort="0009" 
+                    href="mrestepa.github.io/archive/index.html?tag=djangorestframework"
+                    title="djangorestframework"
+                    rel="3">djangorestframework</a>
+        
+                <a data-sort="0010" 
+                    href="mrestepa.github.io/archive/index.html?tag=Django"
+                    title="Django"
+                    rel="2">Django</a>
+        
+                <a data-sort="0010" 
+                    href="mrestepa.github.io/archive/index.html?tag=PostgreSQL"
+                    title="PostgreSQL"
+                    rel="2">PostgreSQL</a>
+        
+                <a data-sort="0010" 
+                    href="mrestepa.github.io/archive/index.html?tag=Wordpress"
+                    title="Wordpress"
+                    rel="2">Wordpress</a>
+    </div>
+</section>
+
+
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/mrestepa">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Programming Notes 2024
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="mrestepa.github.io/js/jquery.min.js "></script>
+<script src="mrestepa.github.io/js/bootstrap.min.js "></script>
+<script src="mrestepa.github.io/js/custom.min.js "></script>
+
+<script src="mrestepa.github.io/js/simple-jekyll-search.min.js"></script>
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        $(selector).html('')
+
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    async("mrestepa.github.io/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<script>
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

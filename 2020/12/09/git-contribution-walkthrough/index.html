@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="A collection of my programming notes for everybody's reference">
+    <meta name="keywords" content="Python, Django, Git">
+    <meta name="theme-color" content="#000000">
+
+    <meta property="og:title"
+        content="Contributing to a Git Repository Walkthrough - Programming Notes">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="This document is an ultimate step by step walkthrough aimed to teach people who are new to Git and Github on how to contribute to Github Projects.
+">
+    
+    <meta property="article:published_time" content=" 2020-12-09T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ray">
+    
+    
+    <meta property="article:tag" content="Git">
+    
+    
+    <meta property="og:image" content="https://github.com/mrestepa.png">
+    <meta property="og:url" content="/2020/12/09/git-contribution-walkthrough/">
+    <meta property="og:site_name" content="Programming Notes">
+
+    <title>Contributing to a Git Repository Walkthrough - Programming Notes</title>
+
+    
+    <link rel="shortcut icon" href="mrestepa.github.io/img/favicon.ico">
+    <link rel="canonical" href="mrestepa.github.io/2020/12/09/git-contribution-walkthrough/">
+    <link rel="stylesheet" href="mrestepa.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" href="mrestepa.github.io/css/custom.min.css">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+        type="text/css">
+
+    <script></script>
+</head>
+
+
+<body ontouchstart="">
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        
+        <div class="container-fluid">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="mrestepa.github.io/index.html/">Programming Notes</a>
+            </div>
+
+            <div id="huxblog_navbar">
+                <div class="navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="mrestepa.github.io/index.html/">Home</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        <li>
+                            <a href="mrestepa.github.io/about/index.html">About</a>
+                        </li>
+                        
+                        
+                        
+                        <li>
+                            <a href="mrestepa.github.io/archive/index.html">Archive</a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <!-- <li class="search-icon">
+                            <a href="javascript:void(0)">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        var $body = document.body;
+        var $toggle = document.querySelector('.navbar-toggle');
+        var $navbar = document.querySelector('#huxblog_navbar');
+        var $collapse = document.querySelector('.navbar-collapse');
+
+        var __HuxNav__ = {
+            close: function () {
+                $navbar.className = " ";
+                setTimeout(function () {
+                    if ($navbar.className.indexOf('in') < 0) {
+                        $collapse.style.height = "0px"
+                    }
+                }, 400)
+            },
+            open: function () {
+                $collapse.style.height = "auto"
+                $navbar.className += " in";
+            }
+        }
+
+        $toggle.addEventListener('click', function (e) {
+            if ($navbar.className.indexOf('in') > 0) {
+                __HuxNav__.close()
+            } else {
+                __HuxNav__.open()
+            }
+        })
+
+        document.addEventListener('click', function (e) {
+            if (e.target == $toggle) return;
+            if (e.target.className == 'icon-bar') return;
+            __HuxNav__.close();
+        })
+    </script>
+    <div class="search-page">
+  <div class="search-icon-close-container">
+    <span class="search-icon-close">
+      <i class="fa fa-chevron-down"></i>
+    </span>
+  </div>
+  <div class="search-main container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <form></form>
+        <input type="text" id="search-input" placeholder="$ grep...">
+        </form>
+        <div id="search-results" class="mini-post-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+<style type="text/css">
+    header.intro-header{
+        position: relative;
+        background-image: url('mrestepa.github.io/img/home-bg.jpg');
+        background: ;
+    }
+
+    
+</style>
+
+
+
+
+<header class="intro-header" >
+
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="mrestepa.github.io/archive/index.html?tag=Git" title="Git">Git</a>
+                        
+                    </div>
+                    <h1>Contributing to a Git Repository Walkthrough</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Ray on December 9, 2020</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+
+				<p>This document is an <strong>ultimate step by step walkthrough</strong> aimed to teach people who are new to Git and Github on <strong>how to contribute to Github Projects</strong>.</p>
+
+<p>This is the workflow and the general idea:</p>
+
+<ol>
+  <li><strong>Navigate to the project</strong> that you want to contribute to, and <strong>Fork it</strong>. The main repository that you forked is called <code class="language-plaintext highlighter-rouge">upstream</code>. Your fork is called <code class="language-plaintext highlighter-rouge">origin</code>.</li>
+  <li><strong>Clone the project</strong> that you just Forked <strong>to your local machine</strong>. The repository that is sitting on your local machine is called <code class="language-plaintext highlighter-rouge">local</code>.</li>
+  <li><strong>Configure the commit settings</strong> on your local machine, including the <code class="language-plaintext highlighter-rouge">upstream</code> link.</li>
+  <li><strong>Create a new branch on your local machine</strong>, and push this branch to your <code class="language-plaintext highlighter-rouge">origin</code>.</li>
+  <li><strong>Add your code changes/contributions to this branch</strong>, and push commits to your <code class="language-plaintext highlighter-rouge">origin</code> as you normally would.</li>
+  <li>When you want to submit your changes, <strong>update your local repository first</strong>. This is done by pulling the changes from the <code class="language-plaintext highlighter-rouge">upstream</code> into your <code class="language-plaintext highlighter-rouge">local</code>.</li>
+  <li><strong>Update your branch that you made some changes on</strong> from your updated local repository (called <code class="language-plaintext highlighter-rouge">rebase</code>), and push these updates, as well as your contributions to your <code class="language-plaintext highlighter-rouge">origin</code><strong>.</strong></li>
+  <li>
+    <p><strong>Create a pull request</strong> from the branch containing your contributions in your <code class="language-plaintext highlighter-rouge">origin</code> to the <code class="language-plaintext highlighter-rouge">dev</code> (or <code class="language-plaintext highlighter-rouge">main</code>) branch of the <code class="language-plaintext highlighter-rouge">upstream</code>.</p>
+  </li>
+  <li>When your pull request is not yet merged, <strong>always update your pull request to avoid merging conflicts.</strong> This is done from step 6 until this step.</li>
+  <li>When creating another contribution, follow from step 4.</li>
+</ol>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+  <li>Basic knowledge on <strong>terminal</strong> (or command promt) commands.</li>
+  <li><strong>Installed <code class="language-plaintext highlighter-rouge">git</code></strong> on your local machine. To check if you have git installed, navigate to terminal and type</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git <span class="nt">--version</span>  <span class="c"># should output your git version. for example</span>
+<span class="c"># git version 2.24.3 (Apple Git-128)</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>If you do not have git installed, <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">check this documentation</a>. If you do not know any basic terminal commands, I suggest you learn about basic commands (you can try <a href="https://www.mrestepa.com/2022/03/10/terminal-common-commands/">this link</a> for your reference).</p>
+
+<h2 id="git-workflow">Git Workflow</h2>
+
+<h3 id="1-forking-github-repositories">1. Forking Github Repositories</h3>
+
+<ol>
+  <li><strong>Navigate to the github repository</strong> that you want to contribute to, and simply <strong>click Fork</strong> (Labelled 1 in the attached image). In this tutorial we are going to clone the <code class="language-plaintext highlighter-rouge">basic-ecommerce</code> repository.</li>
+</ol>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image1.png" alt="Screen Shot 2020-11-26 at 08.39.22" /></p>
+
+<ol>
+  <li>You will know that you have successfully forked the repository when the <strong>repository owner has changed</strong> into your name (Labelled 2 in the previous image). Notice the fork icon beside your name.</li>
+</ol>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image2.png" alt="Screen Shot 2020-11-26 at 08.46.46" /></p>
+
+<ol>
+  <li>The <strong>original repository</strong> (the one you forked) is called the <code class="language-plaintext highlighter-rouge">upstream</code>, while your <strong>forked repository</strong> (the one with your name on it) is called the <code class="language-plaintext highlighter-rouge">origin</code>.</li>
+</ol>
+
+<h3 id="2-cloning-your-forked-repository">2. Cloning Your Forked Repository</h3>
+
+<ol>
+  <li>Locate the <strong>“(download) Code”</strong> button (Labelled 1 in the image), click it and <strong>click the clickboard</strong> icon (Labelled 2 in the image) to copy the repository link.</li>
+</ol>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image3.png" alt="Screen Shot 2020-11-26 at 08.50.37" /></p>
+
+<ol>
+  <li>In your terminal, cd into the folder where you want to store your repository and type <code class="language-plaintext highlighter-rouge">git clone </code> and <strong>paste the link that you copied</strong>. <code class="language-plaintext highlighter-rouge">cd</code> into your newly cloned repository, and type <code class="language-plaintext highlighter-rouge">ls</code> to verify that you have successfully cloned the <code class="language-plaintext highlighter-rouge">origin</code>.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git clone &lt;your_repository <span class="nb">link</span><span class="o">&gt;</span>
+<span class="nv">$ </span><span class="nb">cd</span> &lt;your_repository_name&gt;
+<span class="nv">$ </span><span class="nb">ls</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126090500035.png" alt="image-20201126090500035" /></p>
+
+<h3 id="3-configure-your-commit-settings">3. Configure Your Commit Settings</h3>
+
+<ol>
+  <li><strong>Configure your commit settings</strong> as follows:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="c"># To configure your user name:</span>
+<span class="c"># git config user.name "your_name_here"</span>
+git config user.name <span class="s2">"Coco"</span>
+
+<span class="c"># To configure your user email:</span>
+<span class="c"># git config user.email "your_email@here"</span>
+git config user.email <span class="s2">"coco@mymail.com"</span>
+
+<span class="c"># Type this to see if your changes has been reflected</span>
+git config <span class="nt">--list</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>you can add the <code class="language-plaintext highlighter-rouge">--global</code> to configure your settings globally.</p>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126091556921.png" alt="image-20201126091556921" /></p>
+
+<ol>
+  <li>
+    <p><strong>Add your <code class="language-plaintext highlighter-rouge">upstream</code></strong> by typing the command:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+
+    <p>the link with <code class="language-plaintext highlighter-rouge">https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</code> can be copied from the <strong>HTTPS link on the “Clone button” of the original repository or the <code class="language-plaintext highlighter-rouge">upstream</code></strong></p>
+
+    <p><img src="/img/in-post/git-contribution-walkthrough/image5.png" alt="Screen Shot 2020-11-26 at 09.19.59" /></p>
+  </li>
+  <li>
+    <p><strong>Check your remote configurations</strong> by typing:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git remote <span class="nt">-v</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+
+    <p>you should have a f<strong>etch and push for your <code class="language-plaintext highlighter-rouge">origin</code></strong> (your forked repository), and <strong>fetch and push for the <code class="language-plaintext highlighter-rouge">upstream</code></strong> (the main repository).</p>
+  </li>
+</ol>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126092506283.png" alt="image-20201126092506283" /></p>
+
+<h3 id="4-creating-a-new-branch">4. Creating a New Branch</h3>
+
+<ol>
+  <li>To <strong>create a new branch</strong>, type</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git checkout <span class="nt">-b</span> &lt;branch_name&gt; origin/main
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">checkout</code> is a command that lets you switch branches</p>
+
+<p><code class="language-plaintext highlighter-rouge">-b</code> tells git to create a new branch with the name of <code class="language-plaintext highlighter-rouge">&lt;branch_name</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">origin/main</code> tells git to copy the code from the <code class="language-plaintext highlighter-rouge">main</code> branch of <code class="language-plaintext highlighter-rouge">origin</code> to this newly created branch.</p>
+
+<ol>
+  <li><strong>Push this branch to <code class="language-plaintext highlighter-rouge">origin</code></strong> so your <code class="language-plaintext highlighter-rouge">origin</code> would be updated. Type</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git push <span class="nt">-u</span> origin &lt;branch_name&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>For this example, let’s create a <code class="language-plaintext highlighter-rouge">greetings_list</code> branch.</p>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126100010900.png" alt="image-20201126100010900" /></p>
+
+<h3 id="5-add-your-code-changes">5. Add your code changes</h3>
+
+<p>Edit the codebase as you normally would. In this tutorial we would create a <code class="language-plaintext highlighter-rouge">greetings_list.txt</code> and write a “Hello world” in it.</p>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126100634148.png" alt="image-20201126100634148" /></p>
+
+<p>To push these changes:</p>
+
+<ol>
+  <li><strong>Check your edits</strong> by typing <code class="language-plaintext highlighter-rouge">git status</code>, <strong>add these changes</strong> to staging by typing <code class="language-plaintext highlighter-rouge">git add .</code> (<code class="language-plaintext highlighter-rouge">.</code> means all. If you want you can specifiy what files you’d like to add). <strong>Commit this changes</strong> with a message by typing <code class="language-plaintext highlighter-rouge">git commit -m "&lt;your_message&gt;"</code>. Finally, <strong>push these changes</strong> to the <code class="language-plaintext highlighter-rouge">origin</code> by typing <code class="language-plaintext highlighter-rouge">git push -u origin &lt;branch_name&gt;</code>. In summary,</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git status
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"&lt;your_message_here&gt;"</span>
+<span class="nv">$ </span>git push <span class="nt">-u</span> origin &lt;branch_name&gt;
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126101659390.png" alt="image-20201126101659390" /></p>
+
+<ol>
+  <li>Your edits <strong>should now reflect</strong> on your <code class="language-plaintext highlighter-rouge">origin</code> on the github page. Verify our <code class="language-plaintext highlighter-rouge">greetings_list.txt</code> is now in <code class="language-plaintext highlighter-rouge">origin</code>.</li>
+</ol>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126101616443.png" alt="image-20201126101616443" /></p>
+
+<h3 id="6-updating-local-repository-from-upstream">6. Updating local repository from upstream</h3>
+
+<p>When contributing to a project, it is high likely that your <code class="language-plaintext highlighter-rouge">local</code> repository is behind the <code class="language-plaintext highlighter-rouge">upstream</code> as many developers would merge their changes to the <code class="language-plaintext highlighter-rouge">master</code> (or <code class="language-plaintext highlighter-rouge">development</code>) branch of <code class="language-plaintext highlighter-rouge">upstream</code>. Before requesting for a pull request, we should update our <code class="language-plaintext highlighter-rouge">local</code> and <code class="language-plaintext highlighter-rouge">origin</code> repositories based on the changes of the <code class="language-plaintext highlighter-rouge">upstream</code>.</p>
+
+<p>In this example, while we were editing our <code class="language-plaintext highlighter-rouge">greetings_list.txt</code> the main repository has already updated.</p>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126102628675.png" alt="image-20201126102628675" /></p>
+
+<p>To update our <code class="language-plaintext highlighter-rouge">local</code> and <code class="language-plaintext highlighter-rouge">origin</code>, we can update our <code class="language-plaintext highlighter-rouge">local</code> <code class="language-plaintext highlighter-rouge">main</code> branch by:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git checkout &lt;main_branch_name&gt;
+<span class="nv">$ </span>git fetch upstream
+<span class="nv">$ </span>git merge upstream/&lt;main_branch_name&gt;
+<span class="nv">$ </span>git push <span class="nt">-u</span> origin &lt;origin_main_branch_name&gt;:&lt;local_main_branch_name&gt; <span class="nt">-f</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126103933926.png" alt="image-20201126103933926" /></p>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126104016284.png" alt="image-20201126104016284" /></p>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126104059694.png" alt="image-20201126104059694" /></p>
+
+<h3 id="7-updating-our-local-branch---rebase">7. Updating our local branch - REBASE</h3>
+
+<p>Our <code class="language-plaintext highlighter-rouge">greetings_list</code> branch is now behind our local <code class="language-plaintext highlighter-rouge">main</code> branch (which was just recently updated, see section 6). We also need to <strong>update this branch</strong> by <code class="language-plaintext highlighter-rouge">rebasing</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git checkout &lt;branch_name&gt;
+<span class="nv">$ </span>git fetch origin
+<span class="nv">$ </span>git rebase origin/&lt;main_branch&gt;
+<span class="c"># rebase your codes</span>
+<span class="nv">$ </span>git rebase <span class="nt">--continue</span>
+
+<span class="c">#after rebasing, update origin branch</span>
+<span class="nv">$ </span>git push <span class="nt">-u</span> origin &lt;branch_name&gt; <span class="nt">-f</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image-20201126105058574.png" alt="image-20201126105058574" /></p>
+
+<h3 id="8-creating-a-pull-request">8. Creating a pull request</h3>
+
+<ol>
+  <li>You can create pull requests by <strong>navigating in the branch that you were developing</strong> (in our case, <code class="language-plaintext highlighter-rouge">greetings_list</code> Labelled 2 in the image) and clicking the “Compare &amp; pull request” button (Labelled 1 in the image).</li>
+</ol>
+
+<p><img src="/img/in-post/git-contribution-walkthrough/image4.png" alt="Screen Shot 2020-11-26 at 10.54.47" /></p>
+
+<ol>
+  <li>Edit the pull request title and the description based on the specifications of the project you are contributing to, and click <strong>“Create pull request”</strong>.
+<img src="/img/in-post/git-contribution-walkthrough/image-20201126105846976.png" alt="image-20201126105846976" /></li>
+</ol>
+
+<p><strong>Congratulations!</strong> You just created your pull request. Pull request reviewers will review your code and add comments for you to change.</p>
+
+<h3 id="9-updating-pull-requests">9. Updating Pull Requests</h3>
+
+<p>Expect that your pull requests will not be merged immediately, it might take hours, days, weeks, even months. (Or it might not be merged at all).</p>
+
+<p><strong>Always update your pull requests by following from step 6</strong>, as outdated PRs will not be merged due to merge conflicts. Your reviewer might ask you to update your PR once it is ready for merging.</p>
+
+<h3 id="10-create-another-contribution">10. Create another contribution!</h3>
+
+<p>You’ve done it! <strong>You can create another contribution by following from step 2</strong>.</p>
+
+<h3 id="your-turn">Your turn</h3>
+
+<p>Time get hands on. Fork <a href="https://github.com/MREstepa/git-contribution-walkthrough">this repository</a> and contribute by adding you name (or your pet’s name), your favorite phrase, or whatever you want in the <code class="language-plaintext highlighter-rouge">greetings_list.txt</code>. I might have spelling and grammatical errors, feel free to edit them.</p>
+
+<p>I’ve compiled the commands in <code class="language-plaintext highlighter-rouge">commands.txt</code> for your reference. I’ve also added the command for deleting branch in your <code class="language-plaintext highlighter-rouge">local</code> and <code class="language-plaintext highlighter-rouge">origin</code>.</p>
+
+<hr />
+
+<p>MREstepa</p>
+
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/index.html" data-toggle="tooltip" data-placement="top" title="Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail & Bitbucket">
+                        Previous<br>
+                        <span>Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail & Bitbucket</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="mrestepa.github.io/2021/08/19/customize-zsh-terminal/index.html" data-toggle="tooltip" data-placement="top" title="Customizing MacOS .zsh Terminal">
+                        Next<br>
+                        <span>Customizing MacOS .zsh Terminal</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+            </div>  
+
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+
+
+<section>
+    
+        <hr class="hidden-sm hidden-xs">
+    
+    <h5><a href="mrestepa.github.io/archive/index.html">FEATURED TAGS</a></h5>
+    <div class="tags">
+        
+        
+        
+        
+        
+        
+                <a data-sort="0007" 
+                    href="mrestepa.github.io/archive/index.html?tag=Docker"
+                    title="Docker"
+                    rel="5">Docker</a>
+        
+                <a data-sort="0009" 
+                    href="mrestepa.github.io/archive/index.html?tag=djangorestframework"
+                    title="djangorestframework"
+                    rel="3">djangorestframework</a>
+        
+                <a data-sort="0010" 
+                    href="mrestepa.github.io/archive/index.html?tag=Django"
+                    title="Django"
+                    rel="2">Django</a>
+        
+                <a data-sort="0010" 
+                    href="mrestepa.github.io/archive/index.html?tag=PostgreSQL"
+                    title="PostgreSQL"
+                    rel="2">PostgreSQL</a>
+        
+                <a data-sort="0010" 
+                    href="mrestepa.github.io/archive/index.html?tag=Wordpress"
+                    title="Wordpress"
+                    rel="2">Wordpress</a>
+    </div>
+</section>
+
+
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+
+
+<ul class="list-inline text-center">
+
+
+  
+  
+  
+  
+  
+  
+  <li>
+    <a target="_blank" href="https://github.com/mrestepa">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+  </li>
+  
+  
+</ul>
+
+                <p class="copyright text-muted">
+                    Copyright &copy; Programming Notes 2024
+                    <br>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="mrestepa.github.io/js/jquery.min.js "></script>
+<script src="mrestepa.github.io/js/bootstrap.min.js "></script>
+<script src="mrestepa.github.io/js/custom.min.js "></script>
+
+<script src="mrestepa.github.io/js/simple-jekyll-search.min.js"></script>
+
+<script>
+    function async(u, c) {
+        var d = document, t = 'script',
+            o = d.createElement(t),
+            s = d.getElementsByTagName(t)[0];
+        o.src = u;
+        if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+        s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function () {
+        var $nav = document.querySelector("nav");
+        if ($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+<script type="text/javascript">
+    function generateCatalog(selector) {
+
+        if ('' == 'true') {
+            _containerSelector = 'div.post-container.active'
+        } else {
+            _containerSelector = 'div.post-container'
+        }
+
+        var P = $(_containerSelector), a, n, t, l, i, c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+
+        $(selector).html('')
+
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#" + $(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="' + i + '" rel="nofollow">' + t + '</a>');
+            l = $('<li class="' + n + '_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    $(".catalog-toggle").click((function (e) {
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    async("mrestepa.github.io/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<script>
+    function htmlDecode(input) {
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    }
+
+    SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/search.json',
+        searchResultTemplate: '<div class="post-preview item"><a href="{url}"><h2 class="post-title">{title}</h2><h3 class="post-subtitle">{subtitle}</h3><hr></a></div>',
+        noResultsText: 'No results',
+        limit: 50,
+        fuzzy: false,
+        templateMiddleware: function (prop, value, template) {
+            if (prop === 'subtitle' || prop === 'title') {
+                if (value.indexOf("code")) {
+                    return htmlDecode(value);
+                } else {
+                    return value;
+                }
+            }
+        }
+    });
+
+    $(document).ready(function () {
+        var $searchPage = $('.search-page');
+        var $searchOpen = $('.search-icon');
+        var $searchClose = $('.search-icon-close');
+        var $searchInput = $('#search-input');
+        var $body = $('body');
+
+        $searchOpen.on('click', function (e) {
+            e.preventDefault();
+            $searchPage.toggleClass('search-active');
+            var prevClasses = $body.attr('class') || '';
+            setTimeout(function () {
+                $body.addClass('no-scroll');
+            }, 400)
+
+            if ($searchPage.hasClass('search-active')) {
+                $searchClose.on('click', function (e) {
+                    e.preventDefault();
+                    $searchPage.removeClass('search-active');
+                    $body.attr('class', prevClasses);
+                });
+                $searchInput.focus();
+            }
+        });
+    });
+</script>
+
+</body>
+
+</html>

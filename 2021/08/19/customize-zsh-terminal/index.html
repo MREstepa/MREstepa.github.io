@@ -11,21 +11,30 @@
     <meta name="theme-color" content="#000000">
 
     <meta property="og:title"
-        content="Programming Notes">
+        content="Customizing MacOS .zsh Terminal - Programming Notes">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="「 Happy Coding! 」">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="This document is a guide for customizing MacOS .zsh terminal.
+">
+    
+    <meta property="article:published_time" content=" 2021-08-19T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ray">
+    
+    
+    <meta property="article:tag" content="zsh">
+    
     
     <meta property="og:image" content="https://github.com/mrestepa.png">
-    <meta property="og:url" content="/">
+    <meta property="og:url" content="/2021/08/19/customize-zsh-terminal/">
     <meta property="og:site_name" content="Programming Notes">
 
-    <title>Programming Notes</title>
+    <title>Customizing MacOS .zsh Terminal - Programming Notes</title>
 
     
     <link rel="shortcut icon" href="mrestepa.github.io/img/favicon.ico">
-    <link rel="canonical" href="mrestepa.github.io/">
+    <link rel="canonical" href="mrestepa.github.io/2021/08/19/customize-zsh-terminal/">
     <link rel="stylesheet" href="mrestepa.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="mrestepa.github.io/css/custom.min.css">
 
@@ -163,297 +172,165 @@
 
 
 
+<header class="intro-header" >
 
-
-
-<header class="intro-header" style="background-image: url('mrestepa.github.io/img/home-bg.jpg')">
-  <div class="header-mask"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>Programming Notes</h1>
-          <span class="subheading">「 Happy Coding! 」</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="mrestepa.github.io/archive/index.html?tag=zsh" title="zsh">zsh</a>
+                        
+                    </div>
+                    <h1>Customizing MacOS .zsh Terminal</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Ray on August 19, 2021</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
 
-<div class="container">
-  <div class="row">
-    
-
-    <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12
-      col-xs-12 postlist-container">
-      
-<div class="post-preview">
-    <a href="mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/index.html">
-        <h2 class="post-title">
-            Dockerized React in Development and Production Settings
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Pre-requisites
-
-  Node
-  Docker
 
 
-Check if Node and Docker is installed
-
-  Check if Node is installed
-    1
- $ node --version
-    
-  
-  Check if Docker and docker-compose is installed
-    1
- $ dock...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on January 4, 2024
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/index.html">
-        <h2 class="post-title">
-            Migrate Existing Wordpress Website to a Docker Container
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for migrating an existing wordpress website with live data to a docker container. The container will contain its own mysql, wordpress, and phpmyadmin images.
-
-This guide is...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on August 7, 2023
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/index.html">
-        <h2 class="post-title">
-            Dockerized Wordpress, MySQL, and phpmyadmin with environment variables
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for spinning up a dockerized wordpress, mysql, and phpmyadmin application.
-
-Pre-requisites
-
-  Docker &amp; Docker Compose
 
 
-Creating docker-compose.yml file
+<article>
+    <div class="container">
+        <div class="row">
 
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-  Create and ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on August 4, 2023
-    </p>
-</div>
-<hr>
+                
 
-<div class="post-preview">
-    <a href="mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/index.html">
-        <h2 class="post-title">
-            How To Install docker and docker-compose in Ubuntu Server
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for installing docker and docker compose to an Ubuntu server.
+				<p>This document is a guide for customizing MacOS .zsh terminal.</p>
 
-Installing Docker
+<ol>
+  <li>
+    <p>Download iterm2 from their official site: <a href="https://iterm2.com/">https://iterm2.com/</a>.</p>
+  </li>
+  <li>Install ohmyzsh from their official documentation: <a href="https://ohmyz.sh/#install">https://ohmyz.sh/#install</a>.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>sh <span class="nt">-c</span> <span class="s2">"</span><span class="si">$(</span>curl <span class="nt">-fsSL</span> https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh<span class="si">)</span><span class="s2">"</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Install power level 10k from the official repository: <a href="https://github.com/romkatv/powerlevel10k#installation">https://github.com/romkatv/powerlevel10k#installation</a>.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>git clone https://github.com/romkatv/powerlevel10k.git <span class="nv">$ZSH_CUSTOM</span>/themes/powerlevel10k
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Open the <code class="language-plaintext highlighter-rouge">.zshrc</code> file using your text editor of choice, and edit <code class="language-plaintext highlighter-rouge">ZSH_THEME</code> into <code class="language-plaintext highlighter-rouge">powerlevel10k/powerlevel10k</code>. Save the changes.</p>
+  </li>
+  <li>
+    <p>Restart the terminal by quitting and and reopening.</p>
+  </li>
+  <li>Configure the themes to your liking.</li>
+</ol>
 
-
-  Update and upgrade system repository and system packages
-    1
+<p>This is the configuration of my terminal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-$ sudo apt update
-$ su...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on July 15, 2023
-    </p>
-</div>
-<hr>
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="o">&gt;</span> <span class="nb">install </span>font: <span class="nb">yes</span>
+<span class="o">&gt;</span> prompt style: rainbow
+<span class="o">&gt;</span> character <span class="nb">set</span>: unicode
+<span class="o">&gt;</span> show current <span class="nb">time</span>: No
+<span class="o">&gt;</span> prompt separator: angled
+<span class="o">&gt;</span> prompt heads: sharp
+<span class="o">&gt;</span> prompt tails: flat
+<span class="o">&gt;</span> prompt height: two lines
+<span class="o">&gt;</span> prompt connection: disconnected
+<span class="o">&gt;</span> prompt frame: no frame
+<span class="o">&gt;</span> prompt spacing: compact
+<span class="o">&gt;</span> icons: few icons
+<span class="o">&gt;</span> prompt flow: concise
+<span class="o">&gt;</span> <span class="nb">enable </span>transient prompt: no
+<span class="o">&gt;</span> instant prompt mode: verbose
+<span class="o">&gt;</span> apply changes to ~/.zshrc: <span class="nb">yes</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
 
-<div class="post-preview">
-    <a href="mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/index.html">
-        <h2 class="post-title">
-            DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth
-        </h2>
+<p>To change color scheme, downloaded color scheme reference from: <a href="https://github.com/QuentinWatt/dark-flat-iterm-colors">https://github.com/QuentinWatt/dark-flat-iterm-colors</a>.</p>
+
+<p>Then, open .p10.zsh and search for <code class="language-plaintext highlighter-rouge">POWERLEVEL9K_SHORTEN_STRATEGY</code>. Edit <code class="language-plaintext highlighter-rouge">truncate_to_unique</code> into <code class="language-plaintext highlighter-rouge">truncate_to_last</code>.</p>
+
+<p>Finally, Edit the profile window preference to 110x20</p>
+
+<p>Reference: <a href="https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt">https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt</a>.</p>
+
+
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="mrestepa.github.io/2020/12/09/git-contribution-walkthrough/index.html" data-toggle="tooltip" data-placement="top" title="Contributing to a Git Repository Walkthrough">
+                        Previous<br>
+                        <span>Contributing to a Git Repository Walkthrough</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="mrestepa.github.io/2022/03/10/terminal-common-commands/index.html" data-toggle="tooltip" data-placement="top" title="Most Common Terminal Commands">
+                        Next<br>
+                        <span>Most Common Terminal Commands</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
+
+            </div>  
+
         
-        <div class="post-content-preview">
-            
-                This document is a guide for creating a user handling feature - specifically user registration, login, logout, and password reset for Django with DjangoRestFramework. This can be a continuation of ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on May 11, 2022
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/index.html">
-        <h2 class="post-title">
-            Dockerized Django and PostgreSQL Setup for REST API through DjangoRestFramework (DRF)
-        </h2>
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
-        <div class="post-content-preview">
-            
-                Updated Sep 22, 2023
 
-This document is a guide for setting up a Dockerized Django with DjangoRestFramework (DRF) and PostgreSQL Database backend web application from scratch.
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-Pre-requisites
-
-  Pyt...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on April 5, 2022
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2022/03/10/terminal-common-commands/index.html">
-        <h2 class="post-title">
-            Most Common Terminal Commands
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for most common terminal commands.
-
-To determine which shell is your terminal running, type
-1
-2
-$ echo $0
-# should output your shell
-
-
-In this tutorial, a .zsh will be used...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on March 10, 2022
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2021/08/19/customize-zsh-terminal/index.html">
-        <h2 class="post-title">
-            Customizing MacOS .zsh Terminal
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for customizing MacOS .zsh terminal.
-
-
-  
-    Download iterm2 from their official site: https://iterm2.com/.
-  
-  Install ohmyzsh from their official documentation: https:/...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on August 19, 2021
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2020/12/09/git-contribution-walkthrough/index.html">
-        <h2 class="post-title">
-            Contributing to a Git Repository Walkthrough
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is an ultimate step by step walkthrough aimed to teach people who are new to Git and Github on how to contribute to Github Projects.
-
-This is the workflow and the general idea:
-
-
-  Na...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on December 9, 2020
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/index.html">
-        <h2 class="post-title">
-            Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail & Bitbucket
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for creating CI/CD Pipeline with AWS CodeDeploy, CodePipeline, Amazon Lightsail, and Bitbucket.
-
-Guide from the official AWS Compute Blog: Using AWS CodeDeploy, AWS CodePip...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on November 23, 2020
-    </p>
-</div>
-<hr>
-
-
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="mrestepa.github.io/page2/index.html">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
-
-    </div>
-    <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12
-      col-xs-12 sidebar-container">
-      
+                
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="mrestepa.github.io/archive/index.html">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -491,49 +368,45 @@ Guide from the official AWS Compute Blog: Using AWS CodeDeploy, AWS CodePip...
 </section>
 
 
-      <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="mrestepa.github.io/about/index.html">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="https://github.com/mrestepa.png" />
-    
-    
-    <p>Programmer | Software Dev</p>
-    
-
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/mrestepa">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-</ul>
-  </div>
-</section>
-
-      
+                
+            </div>
+        </div>
     </div>
-    
-  </div>
-</div>
+</article>
 
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 

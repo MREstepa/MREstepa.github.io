@@ -11,21 +11,32 @@
     <meta name="theme-color" content="#000000">
 
     <meta property="og:title"
-        content="Programming Notes">
+        content="How To Install docker and docker-compose in Ubuntu Server - Programming Notes">
     
-    <meta property="og:type" content="website">
-    <meta property="og:description"
-        content="「 Happy Coding! 」">
+    <meta property="og:type" content="article">
+    <meta property="og:description" content="This document is a guide for installing docker and docker compose to an Ubuntu server.
+">
+    
+    <meta property="article:published_time" content=" 2023-07-15T00:00:00Z">
+    
+    
+    <meta property="article:author" content="Ray">
+    
+    
+    <meta property="article:tag" content="Docker">
+    
+    <meta property="article:tag" content="Ubuntu">
+    
     
     <meta property="og:image" content="https://github.com/mrestepa.png">
-    <meta property="og:url" content="/">
+    <meta property="og:url" content="/2023/07/15/install-docker-compose-ubuntu/">
     <meta property="og:site_name" content="Programming Notes">
 
-    <title>Programming Notes</title>
+    <title>How To Install docker and docker-compose in Ubuntu Server - Programming Notes</title>
 
     
     <link rel="shortcut icon" href="mrestepa.github.io/img/favicon.ico">
-    <link rel="canonical" href="mrestepa.github.io/">
+    <link rel="canonical" href="mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/">
     <link rel="stylesheet" href="mrestepa.github.io/css/bootstrap.min.css">
     <link rel="stylesheet" href="mrestepa.github.io/css/custom.min.css">
 
@@ -163,297 +174,172 @@
 
 
 
+<header class="intro-header" >
 
-
-
-<header class="intro-header" style="background-image: url('mrestepa.github.io/img/home-bg.jpg')">
-  <div class="header-mask"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-        <div class="site-heading">
-        
-          <h1>Programming Notes</h1>
-          <span class="subheading">「 Happy Coding! 」</span>
+    <div class="header-mask"></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                        <a class="tag" href="mrestepa.github.io/archive/index.html?tag=Docker" title="Docker">Docker</a>
+                        
+                        <a class="tag" href="mrestepa.github.io/archive/index.html?tag=Ubuntu" title="Ubuntu">Ubuntu</a>
+                        
+                    </div>
+                    <h1>How To Install docker and docker-compose in Ubuntu Server</h1>
+                    
+                    <h2 class="subheading"></h2>
+                    <span class="meta">Posted by Ray on July 15, 2023</span>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </header>
 
 
 
-<div class="container">
-  <div class="row">
-    
-
-    <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12
-      col-xs-12 postlist-container">
-      
-<div class="post-preview">
-    <a href="mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/index.html">
-        <h2 class="post-title">
-            Dockerized React in Development and Production Settings
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Pre-requisites
-
-  Node
-  Docker
 
 
-Check if Node and Docker is installed
-
-  Check if Node is installed
-    1
- $ node --version
-    
-  
-  Check if Docker and docker-compose is installed
-    1
- $ dock...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on January 4, 2024
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/index.html">
-        <h2 class="post-title">
-            Migrate Existing Wordpress Website to a Docker Container
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for migrating an existing wordpress website with live data to a docker container. The container will contain its own mysql, wordpress, and phpmyadmin images.
-
-This guide is...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on August 7, 2023
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/index.html">
-        <h2 class="post-title">
-            Dockerized Wordpress, MySQL, and phpmyadmin with environment variables
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for spinning up a dockerized wordpress, mysql, and phpmyadmin application.
-
-Pre-requisites
-
-  Docker &amp; Docker Compose
 
 
-Creating docker-compose.yml file
+<article>
+    <div class="container">
+        <div class="row">
 
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-  Create and ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on August 4, 2023
-    </p>
-</div>
-<hr>
+                
 
-<div class="post-preview">
-    <a href="mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/index.html">
-        <h2 class="post-title">
-            How To Install docker and docker-compose in Ubuntu Server
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for installing docker and docker compose to an Ubuntu server.
+				<p>This document is a guide for installing docker and docker compose to an Ubuntu server.</p>
 
-Installing Docker
+<h2 id="installing-docker">Installing Docker</h2>
 
-
-  Update and upgrade system repository and system packages
-    1
+<ol>
+  <li>Update and upgrade system repository and system packages
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-$ sudo apt update
-$ su...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on July 15, 2023
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/index.html">
-        <h2 class="post-title">
-            DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for creating a user handling feature - specifically user registration, login, logout, and password reset for Django with DjangoRestFramework. This can be a continuation of ...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on May 11, 2022
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/index.html">
-        <h2 class="post-title">
-            Dockerized Django and PostgreSQL Setup for REST API through DjangoRestFramework (DRF)
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                Updated Sep 22, 2023
-
-This document is a guide for setting up a Dockerized Django with DjangoRestFramework (DRF) and PostgreSQL Database backend web application from scratch.
-
-Pre-requisites
-
-  Pyt...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on April 5, 2022
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2022/03/10/terminal-common-commands/index.html">
-        <h2 class="post-title">
-            Most Common Terminal Commands
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for most common terminal commands.
-
-To determine which shell is your terminal running, type
-1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt update
+<span class="nv">$ </span><span class="nb">sudo </span>apt upgrade
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/sudo_apt_update.png" alt="sudo_apt_update" />
+<img src="/img/in-post/install-docker-compose-ubuntu/sudo_apt_upgrade.png" alt="sudo_apt_upgrade" /></p>
+  </li>
+  <li>Install docker dependencies
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>lsb-release ca-certificates apt-transport-https software-properties-common <span class="nt">-y</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/install_docker_dependencies.png" alt="install_docker_dependencies" /></p>
+  </li>
+  <li>Add Docker repository to system resources
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-$ echo $0
-# should output your shell
+3
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>snap <span class="nb">install </span>curl
+<span class="nv">$ </span>curl <span class="nt">-fsSL</span> https://download.docker.com/linux/ubuntu/gpg | <span class="nb">sudo </span>gpg <span class="nt">--dearmor</span> <span class="nt">-o</span> /usr/share/keyrings/docker-archive-keyring.gpg
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"deb [arch=</span><span class="si">$(</span>dpkg <span class="nt">--print-architecture</span><span class="si">)</span><span class="s2"> signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu </span><span class="si">$(</span>lsb_release <span class="nt">-cs</span><span class="si">)</span><span class="s2"> stable"</span> | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/docker.list <span class="o">&gt;</span> /dev/null
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/add_docker_repository.png" alt="add_docker_repository" /></p>
+  </li>
+  <li>Update and upgrade system packages
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt update
+<span class="nv">$ </span><span class="nb">sudo </span>apt upgrade
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/update_and_upgrade.png" alt="update_and_upgrade" /></p>
+  </li>
+  <li>Install Docker
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>docker-ce
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/install_docker.png" alt="install_docker" /></p>
+  </li>
+  <li>Check docker status and version
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>systemctl status docker
+<span class="nv">$ </span>docker <span class="nt">--version</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/check_docker_status.png" alt="check_docker_status" /></p>
+  </li>
+</ol>
+
+<h2 id="installing-docker-compose">Installing Docker Compose</h2>
+
+<ol>
+  <li>Install Docker Compose using apt
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>docker-compose
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/install_docker_compose.png" alt="install_docker_compose" /></p>
+  </li>
+  <li>Check docker-compose version
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span>docker-compose <span class="nt">--version</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p><img src="/img/in-post/install-docker-compose-ubuntu/docker_compose_version.png" alt="docker_compose_version" /></p>
+  </li>
+</ol>
+
+<p>Done!</p>
 
 
-In this tutorial, a .zsh will be used...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on March 10, 2022
-    </p>
-</div>
-<hr>
+                <hr style="visibility: hidden;">
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/index.html" data-toggle="tooltip" data-placement="top" title="DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth">
+                        Previous<br>
+                        <span>DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth</span>
+                        </a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/index.html" data-toggle="tooltip" data-placement="top" title="Dockerized Wordpress, MySQL, and phpmyadmin with environment variables">
+                        Next<br>
+                        <span>Dockerized Wordpress, MySQL, and phpmyadmin with environment variables</span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <hr style="visibility: hidden;">
 
-<div class="post-preview">
-    <a href="mrestepa.github.io/2021/08/19/customize-zsh-terminal/index.html">
-        <h2 class="post-title">
-            Customizing MacOS .zsh Terminal
-        </h2>
+            </div>  
+
         
-        <div class="post-content-preview">
-            
-                This document is a guide for customizing MacOS .zsh terminal.
-
-
-  
-    Download iterm2 from their official site: https://iterm2.com/.
-  
-  Install ohmyzsh from their official documentation: https:/...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on August 19, 2021
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2020/12/09/git-contribution-walkthrough/index.html">
-        <h2 class="post-title">
-            Contributing to a Git Repository Walkthrough
-        </h2>
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
         
-        <div class="post-content-preview">
-            
-                This document is an ultimate step by step walkthrough aimed to teach people who are new to Git and Github on how to contribute to Github Projects.
 
-This is the workflow and the general idea:
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
 
-
-  Na...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on December 9, 2020
-    </p>
-</div>
-<hr>
-
-<div class="post-preview">
-    <a href="mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/index.html">
-        <h2 class="post-title">
-            Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail & Bitbucket
-        </h2>
-        
-        <div class="post-content-preview">
-            
-                This document is a guide for creating CI/CD Pipeline with AWS CodeDeploy, CodePipeline, Amazon Lightsail, and Bitbucket.
-
-Guide from the official AWS Compute Blog: Using AWS CodeDeploy, AWS CodePip...
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ray on November 23, 2020
-    </p>
-</div>
-<hr>
-
-
-
-<ul class="pager">
-    
-    
-    <li class="next">
-        <a href="mrestepa.github.io/page2/index.html">Older Posts &rarr;</a>
-    </li>
-    
-</ul>
-
-
-    </div>
-    <div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12
-      col-xs-12 sidebar-container">
-      
+                
 
 
 <section>
+    
+        <hr class="hidden-sm hidden-xs">
     
     <h5><a href="mrestepa.github.io/archive/index.html">FEATURED TAGS</a></h5>
     <div class="tags">
@@ -491,49 +377,45 @@ Guide from the official AWS Compute Blog: Using AWS CodeDeploy, AWS CodePip...
 </section>
 
 
-      <section class="visible-md visible-lg">
-  <hr>
-  <h5><a href="mrestepa.github.io/about/index.html">ABOUT ME</a></h5>
-  <div class="short-about">
-    
-    <img src="https://github.com/mrestepa.png" />
-    
-    
-    <p>Programmer | Software Dev</p>
-    
-
-    
-
-
-<ul class="list-inline">
-
-
-  
-  
-  
-  
-  
-  
-  <li>
-    <a target="_blank" href="https://github.com/mrestepa">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-  </li>
-  
-  
-</ul>
-  </div>
-</section>
-
-      
+                
+            </div>
+        </div>
     </div>
-    
-  </div>
-</div>
+</article>
 
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<script>
+    async("//cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'right',
+          // icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 
