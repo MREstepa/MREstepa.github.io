@@ -3,10 +3,10 @@
   <channel>
     <title>Programming Notes</title>
     <description>A collection of my programming notes for everybody&apos;s reference</description>
-    <link>mrestepa.github.io/</link>
-    <atom:link href="mrestepa.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 04 Jan 2024 22:35:34 +0800</pubDate>
-    <lastBuildDate>Thu, 04 Jan 2024 22:35:34 +0800</lastBuildDate>
+    <link>https://mrestepa.github.io/</link>
+    <atom:link href="https://mrestepa.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 04 Jan 2024 22:45:40 +0800</pubDate>
+    <lastBuildDate>Thu, 04 Jan 2024 22:45:40 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
@@ -271,8 +271,8 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 04 Jan 2024 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/</guid>
+        <link>https://mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/</guid>
         
         <category>React</category>
         
@@ -449,8 +449,8 @@ mysql &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot
 &lt;p&gt;Done!&lt;/p&gt;
 </description>
         <pubDate>Mon, 07 Aug 2023 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/</guid>
+        <link>https://mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/</guid>
         
         <category>Docker</category>
         
@@ -654,8 +654,8 @@ mysql &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot
 &lt;p&gt;*** To spin up multiple dockerized applications on a single host (separate wordpress, database, and phpmyadmins per project), use different port configuration for each project. Example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proj1&lt;/code&gt; should use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MYSQL_TCP_PORT=3306&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPMYADMIN_PORT=8080&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WORDPRESS_PORT=8000&lt;/code&gt;, while &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;proj2&lt;/code&gt; should use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;MYSQL_TCP_PORT=3307&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PHPMYADMIN_PORT=8081&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WORDPRESS_PORT=8001&lt;/code&gt;.&lt;/p&gt;
 </description>
         <pubDate>Fri, 04 Aug 2023 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/</guid>
+        <link>https://mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/</guid>
         
         <category>Docker</category>
         
@@ -740,8 +740,8 @@ mysql &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot
 &lt;p&gt;Done!&lt;/p&gt;
 </description>
         <pubDate>Sat, 15 Jul 2023 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/</guid>
+        <link>https://mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/</guid>
         
         <category>Docker</category>
         
@@ -938,8 +938,8 @@ Add &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;REST_FRAM
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 11 May 2022 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/</guid>
+        <link>https://mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/</guid>
         
         <category>Django</category>
         
@@ -1516,8 +1516,8 @@ COPY &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /code/
 &lt;/ol&gt;
 </description>
         <pubDate>Tue, 05 Apr 2022 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/</guid>
+        <link>https://mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/</guid>
         
         <category>Docker</category>
         
@@ -1805,8 +1805,8 @@ COPY &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /code/
 &lt;p&gt;&lt;img src=&quot;/img/in-post/terminal-basic-commands/sudo_output.png&quot; alt=&quot;sudo_command_output&quot; /&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 10 Mar 2022 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2022/03/10/terminal-common-commands/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2022/03/10/terminal-common-commands/</guid>
+        <link>https://mrestepa.github.io/2022/03/10/terminal-common-commands/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2022/03/10/terminal-common-commands/</guid>
         
         <category>terminal</category>
         
@@ -1888,8 +1888,8 @@ COPY &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /code/
 &lt;p&gt;Reference: &lt;a href=&quot;https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt&quot;&gt;https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Thu, 19 Aug 2021 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2021/08/19/customize-zsh-terminal/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2021/08/19/customize-zsh-terminal/</guid>
+        <link>https://mrestepa.github.io/2021/08/19/customize-zsh-terminal/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2021/08/19/customize-zsh-terminal/</guid>
         
         <category>zsh</category>
         
@@ -2176,8 +2176,8 @@ git config &lt;span class=&quot;nt&quot;&gt;--list&lt;/span&gt;
 
 </description>
         <pubDate>Wed, 09 Dec 2020 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2020/12/09/git-contribution-walkthrough/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2020/12/09/git-contribution-walkthrough/</guid>
+        <link>https://mrestepa.github.io/2020/12/09/git-contribution-walkthrough/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2020/12/09/git-contribution-walkthrough/</guid>
         
         <category>Git</category>
         
@@ -2503,8 +2503,8 @@ aws deploy list-on-premises-instances &lt;span class=&quot;nt&quot;&gt;--region&
 &lt;p&gt;&lt;strong&gt;Congratulations!&lt;/strong&gt; You have created a CI/CD Pipeline with AWS CodePipeline, AWS CodeDeploy, Amazon Lightsail, and Bitbucket.&lt;/p&gt;
 </description>
         <pubDate>Mon, 23 Nov 2020 00:00:00 +0800</pubDate>
-        <link>mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/</link>
-        <guid isPermaLink="true">mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/</guid>
+        <link>https://mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/</link>
+        <guid isPermaLink="true">https://mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/</guid>
         
         <category>AWS</category>
         
