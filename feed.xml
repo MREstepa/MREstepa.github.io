@@ -5,13 +5,15 @@
     <description>A collection of my programming notes for everybody&apos;s reference</description>
     <link>https://mrestepa.github.io/</link>
     <atom:link href="https://mrestepa.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 04 Jan 2024 23:05:21 +0800</pubDate>
-    <lastBuildDate>Thu, 04 Jan 2024 23:05:21 +0800</lastBuildDate>
+    <pubDate>Thu, 04 Jan 2024 23:21:40 +0800</pubDate>
+    <lastBuildDate>Thu, 04 Jan 2024 23:21:40 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
         <title>Dockerized React in Development and Production Settings</title>
-        <description>&lt;h2 id=&quot;pre-requisites&quot;&gt;Pre-requisites&lt;/h2&gt;
+        <description>&lt;p&gt;This document is a guide for creating a react application in production and development environments inside a docker container.&lt;/p&gt;
+
+&lt;h2 id=&quot;pre-requisites&quot;&gt;Pre-requisites&lt;/h2&gt;
 &lt;ol&gt;
   &lt;li&gt;Node&lt;/li&gt;
   &lt;li&gt;Docker&lt;/li&gt;
@@ -277,8 +279,6 @@
         <category>React</category>
         
         <category>Docker</category>
-        
-        <category>djangorestframework</category>
         
         
       </item>
