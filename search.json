@@ -4,7 +4,7 @@
       "title"    : "Dockerized React in Development and Production Settings",
       "subtitle" : "",
       "tags"     : "React, Docker",
-      "url"      : "https://mrestepa.github.io/2024/01/04/dockerized-react-production-and-development/",
+      "url"      : "/2024/01/04/dockerized-react-production-and-development/",
       "date"     : "2024-01-04 00:00:00 +0800"
     } ,
   
@@ -12,7 +12,7 @@
       "title"    : "Migrate Existing Wordpress Website to a Docker Container",
       "subtitle" : "",
       "tags"     : "Docker, Wordpress",
-      "url"      : "https://mrestepa.github.io/2023/08/07/migrate-existing-wordpress-to-docker/",
+      "url"      : "/2023/08/07/migrate-existing-wordpress-to-docker/",
       "date"     : "2023-08-07 00:00:00 +0800"
     } ,
   
@@ -20,7 +20,7 @@
       "title"    : "Dockerized Wordpress, MySQL, and phpmyadmin with environment variables",
       "subtitle" : "",
       "tags"     : "Docker, Wordpress",
-      "url"      : "https://mrestepa.github.io/2023/08/04/dockerize-wpress-mysql-phpmyadmin/",
+      "url"      : "/2023/08/04/dockerize-wpress-mysql-phpmyadmin/",
       "date"     : "2023-08-04 00:00:00 +0800"
     } ,
   
@@ -28,7 +28,7 @@
       "title"    : "How To Install docker and docker-compose in Ubuntu Server",
       "subtitle" : "",
       "tags"     : "Docker, Ubuntu",
-      "url"      : "https://mrestepa.github.io/2023/07/15/install-docker-compose-ubuntu/",
+      "url"      : "/2023/07/15/install-docker-compose-ubuntu/",
       "date"     : "2023-07-15 00:00:00 +0800"
     } ,
   
@@ -36,7 +36,7 @@
       "title"    : "DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth",
       "subtitle" : "",
       "tags"     : "Django, PostgreSQL, djangorestframework",
-      "url"      : "https://mrestepa.github.io/2022/05/11/drf-user-registration-login-logout-password/",
+      "url"      : "/2022/05/11/drf-user-registration-login-logout-password/",
       "date"     : "2022-05-11 00:00:00 +0800"
     } ,
   
@@ -44,7 +44,7 @@
       "title"    : "Dockerized Django and PostgreSQL Setup for REST API through DjangoRestFramework (DRF)",
       "subtitle" : "",
       "tags"     : "Docker, Django, PostgreSQL, djangorestframework",
-      "url"      : "https://mrestepa.github.io/2022/04/05/dockerized-django-postgresql-setup/",
+      "url"      : "/2022/04/05/dockerized-django-postgresql-setup/",
       "date"     : "2022-04-05 00:00:00 +0800"
     } ,
   
@@ -52,7 +52,7 @@
       "title"    : "Most Common Terminal Commands",
       "subtitle" : "",
       "tags"     : "terminal, Windows, Linux",
-      "url"      : "https://mrestepa.github.io/2022/03/10/terminal-common-commands/",
+      "url"      : "/2022/03/10/terminal-common-commands/",
       "date"     : "2022-03-10 00:00:00 +0800"
     } ,
   
@@ -60,7 +60,7 @@
       "title"    : "Customizing MacOS .zsh Terminal",
       "subtitle" : "",
       "tags"     : "zsh",
-      "url"      : "https://mrestepa.github.io/2021/08/19/customize-zsh-terminal/",
+      "url"      : "/2021/08/19/customize-zsh-terminal/",
       "date"     : "2021-08-19 00:00:00 +0800"
     } ,
   
@@ -68,7 +68,7 @@
       "title"    : "Contributing to a Git Repository Walkthrough",
       "subtitle" : "",
       "tags"     : "Git",
-      "url"      : "https://mrestepa.github.io/2020/12/09/git-contribution-walkthrough/",
+      "url"      : "/2020/12/09/git-contribution-walkthrough/",
       "date"     : "2020-12-09 00:00:00 +0800"
     } ,
   
@@ -76,7 +76,7 @@
       "title"    : "Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail &amp; Bitbucket",
       "subtitle" : "",
       "tags"     : "AWS, Bitbucket",
-      "url"      : "https://mrestepa.github.io/2020/11/23/cicd-pipeline-with-aws-bitbucket/",
+      "url"      : "/2020/11/23/cicd-pipeline-with-aws-bitbucket/",
       "date"     : "2020-11-23 00:00:00 +0800"
     } ,
   
@@ -84,7 +84,7 @@
       "title"    : "Python Virtual Environment Basic Commands",
       "subtitle" : "",
       "tags"     : "Python, venv",
-      "url"      : "https://mrestepa.github.io/2020/10/14/python-venv-basic-commands/",
+      "url"      : "/2020/10/14/python-venv-basic-commands/",
       "date"     : "2020-10-14 00:00:00 +0800"
     } ,
   
@@ -92,7 +92,7 @@
       "title"    : "How To Create a Bash Script in MacOS/Linux",
       "subtitle" : "",
       "tags"     : "bash, script",
-      "url"      : "https://mrestepa.github.io/2020/09/19/create-bash-script/",
+      "url"      : "/2020/09/19/create-bash-script/",
       "date"     : "2020-09-19 00:00:00 +0800"
     } 
   
