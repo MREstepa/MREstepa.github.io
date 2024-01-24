@@ -5,9 +5,144 @@
     <description>A collection of my programming notes for everybody&apos;s reference</description>
     <link>https://mrestepa.com/</link>
     <atom:link href="https://mrestepa.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 24 Jan 2024 10:17:59 +0800</pubDate>
-    <lastBuildDate>Wed, 24 Jan 2024 10:17:59 +0800</lastBuildDate>
+    <pubDate>Wed, 24 Jan 2024 13:05:35 +0800</pubDate>
+    <lastBuildDate>Wed, 24 Jan 2024 13:05:35 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>Creating Scheduled Automatic Daily, Weekly, and Monthly Backup</title>
+        <description>&lt;p&gt;A guide for creating backup scripts and scheduling them to run daily, weekly, and monthly.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-backup-scripts&quot;&gt;Creating Backup Scripts&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Create a backup directory to store the backup scripts and files, and navigate into this directory.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;backups &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;backups
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;daily&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;weekly&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;monthly&lt;/code&gt; directories to store backups.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;daily weekly monthly
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Create a backup scripts to run.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# nano &amp;lt;name&amp;gt;-backup.sh; example:&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nano daily-backup.sh
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/creating-daily-weekly-monthly-backup/setup.png&quot; alt=&quot;setup&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Type the following code:
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zcf&lt;/span&gt; &amp;lt;store_backup_dir&amp;gt;/&amp;lt;backup_file_name&amp;gt;-&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%Y%m%d&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &amp;lt;file_or_folder_dir&amp;gt; &amp;lt;file_or_folder_to_backup&amp;gt;
+ find &amp;lt;store_backup_dir&amp;gt;/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-mtime&lt;/span&gt; +&amp;lt;num_of_days&amp;gt; &lt;span class=&quot;nt&quot;&gt;-delete&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;The first line has the commands:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tar&lt;/code&gt; compresses files to a tar format&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-zcf&lt;/code&gt; means g&lt;strong&gt;&lt;em&gt;z&lt;/em&gt;&lt;/strong&gt;ip &lt;strong&gt;&lt;em&gt;c&lt;/em&gt;&lt;/strong&gt;ompress into a &lt;strong&gt;&lt;em&gt;f&lt;/em&gt;&lt;/strong&gt;ile&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;store_backup_dir&amp;gt;&lt;/code&gt; implies the full path to the directory where you want to store the backup file&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;backup_file_name&amp;gt;&lt;/code&gt; implies the name of the backup file&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$(date +%Y%m%d)&lt;/code&gt; appends the current date of when the backup file is generated&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.tar.gz&lt;/code&gt; is the backup file extension&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-C&lt;/code&gt; means change directory to where the file to be backed up is located&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;file_or_folder_dir&amp;gt;&lt;/code&gt;implies the full path to the directory where the file of folder to back up is located&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;file_or_folder_to_backup&amp;gt;&lt;/code&gt; is the name of the file or folder to be backed up&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;The second line has the commands:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; searches files&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;store_backup_dir&amp;gt;/*&lt;/code&gt; refers to all backup files located in the backup folder&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-mtime +&lt;/code&gt; to filter files created &lt;num_of_days&gt; ago&lt;/num_of_days&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;num_of_days&amp;gt;&lt;/code&gt; specifies the number of days to filter&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-delete&lt;/code&gt; command that deletes old backup files that were filtered&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;example using daily backup:&lt;/p&gt;
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# Daily backup for last 7 days&lt;/span&gt;
+ &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zcf&lt;/span&gt; /Users/ray/Desktop/backups/daily/backup-&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%Y%m%d&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; /Users/ray/Desktop/ assets/
+ find /Users/ray/Desktop/backups/daily/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-mtime&lt;/span&gt; +7 &lt;span class=&quot;nt&quot;&gt;-delete&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/creating-daily-weekly-monthly-backup/daily_backup.png&quot; alt=&quot;daily_backup&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Run script to check if it works.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sh daily-backup.sh
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;daily &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# backup file should be created&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xzvf&lt;/span&gt; backup-&amp;lt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;.tar.gz
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# backup file should be extracted&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/creating-daily-weekly-monthly-backup/script_working.png&quot; alt=&quot;script_working&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Repeat steps 3 to 5 for weekly and monthly scripts. Input your desired number of days to filter in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;num_of_days&amp;gt;&lt;/code&gt; parameter. Weekly backup for the last 5 weeks would be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+31&lt;/code&gt;, and monthly backup for the last 5 months would be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;+100&lt;/code&gt;.&lt;/p&gt;
+
+    &lt;p&gt;Example for weekly:&lt;/p&gt;
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# Weekly backup for last 5 weeks&lt;/span&gt;
+ &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zcf&lt;/span&gt; /Users/ray/Desktop/backups/weekly/backup-&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%Y%m%d&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; /Users/ray/Desktop/ assets/
+ find /Users/ray/Desktop/backups/weekly/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-mtime&lt;/span&gt; +100 &lt;span class=&quot;nt&quot;&gt;-delete&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;Example for monthly:&lt;/p&gt;
+    &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# Monthly backup for last 4 months&lt;/span&gt;
+ &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zcf&lt;/span&gt; /Users/ray/Desktop/backups/monthly/backup-&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; +%Y%m%d&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; /Users/ray/Desktop/ assets/
+ find /Users/ray/Desktop/backups/monthly/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-mtime&lt;/span&gt; +100 &lt;span class=&quot;nt&quot;&gt;-delete&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;schedule-script-execution-using-cron&quot;&gt;Schedule Script Execution Using Cron&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt; in the terminal&lt;/li&gt;
+  &lt;li&gt;Schedule your script to run at specific times. Use https://crontab.cronhub.io/ for easier cron creation
+ Example:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; 15 0 1 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; sh &amp;lt;path_to_script&amp;gt;/backup-monthly.sh
+ 15 0 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; sh &amp;lt;path_to_script&amp;gt;/backup-daily.sh
+ 15 0 &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; 1 sh &amp;lt;path_to_script&amp;gt;/backup-weekly.sh
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Save and exit file&lt;/li&gt;
+  &lt;li&gt;Check backup files after a few days to verify if worked.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 25 Jan 2024 00:00:00 +0800</pubDate>
+        <link>https://mrestepa.com/2024/01/25/creating-daily-weekly-monthly-backup/</link>
+        <guid isPermaLink="true">https://mrestepa.com/2024/01/25/creating-daily-weekly-monthly-backup/</guid>
+        
+        <category>backup</category>
+        
+        
+      </item>
     
       <item>
         <title>Secure File Transfer Protocol (SFTP) Basic Terminal Commands</title>
@@ -18,8 +153,14 @@
   &lt;li&gt;Open up terminal, and connect to host using the command:
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
+3
+4
+5
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# sftp &amp;lt;username&amp;gt;@&amp;lt;host_name_or_ip_address&amp;gt;&lt;/span&gt;
  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sftp mrestepa@XXX.XXX.XX.XXX
+
+ &lt;span class=&quot;c&quot;&gt;# To use custom port:&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# sftp -P &amp;lt;custom_port&amp;gt; &amp;lt;username&amp;gt;@&amp;lt;host_name_or_ip_address&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
@@ -2022,294 +2163,6 @@ COPY &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /code/
         <guid isPermaLink="true">https://mrestepa.com/2021/08/19/customize-zsh-terminal/</guid>
         
         <category>zsh</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Contributing to a Git Repository Walkthrough</title>
-        <description>&lt;p&gt;This document is an &lt;strong&gt;ultimate step by step walkthrough&lt;/strong&gt; aimed to teach people who are new to Git and Github on &lt;strong&gt;how to contribute to Github Projects&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;This is the workflow and the general idea:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Navigate to the project&lt;/strong&gt; that you want to contribute to, and &lt;strong&gt;Fork it&lt;/strong&gt;. The main repository that you forked is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;. Your fork is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Clone the project&lt;/strong&gt; that you just Forked &lt;strong&gt;to your local machine&lt;/strong&gt;. The repository that is sitting on your local machine is called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Configure the commit settings&lt;/strong&gt; on your local machine, including the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt; link.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Create a new branch on your local machine&lt;/strong&gt;, and push this branch to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Add your code changes/contributions to this branch&lt;/strong&gt;, and push commits to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; as you normally would.&lt;/li&gt;
-  &lt;li&gt;When you want to submit your changes, &lt;strong&gt;update your local repository first&lt;/strong&gt;. This is done by pulling the changes from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt; into your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Update your branch that you made some changes on&lt;/strong&gt; from your updated local repository (called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rebase&lt;/code&gt;), and push these updates, as well as your contributions to your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;&lt;strong&gt;.&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Create a pull request&lt;/strong&gt; from the branch containing your contributions in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dev&lt;/code&gt; (or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;) branch of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;When your pull request is not yet merged, &lt;strong&gt;always update your pull request to avoid merging conflicts.&lt;/strong&gt; This is done from step 6 until this step.&lt;/li&gt;
-  &lt;li&gt;When creating another contribution, follow from step 4.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Basic knowledge on &lt;strong&gt;terminal&lt;/strong&gt; (or command promt) commands.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Installed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt;&lt;/strong&gt; on your local machine. To check if you have git installed, navigate to terminal and type&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# should output your git version. for example&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# git version 2.24.3 (Apple Git-128)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;If you do not have git installed, &lt;a href=&quot;https://git-scm.com/book/en/v2/Getting-Started-Installing-Git&quot;&gt;check this documentation&lt;/a&gt;. If you do not know any basic terminal commands, I suggest you learn about basic commands (you can try &lt;a href=&quot;https://www.mrestepa.com/2022/03/10/terminal-common-commands/&quot;&gt;this link&lt;/a&gt; for your reference).&lt;/p&gt;
-
-&lt;h2 id=&quot;git-workflow&quot;&gt;Git Workflow&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-forking-github-repositories&quot;&gt;1. Forking Github Repositories&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Navigate to the github repository&lt;/strong&gt; that you want to contribute to, and simply &lt;strong&gt;click Fork&lt;/strong&gt; (Labelled 1 in the attached image). In this tutorial we are going to clone the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;basic-ecommerce&lt;/code&gt; repository.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image1.png&quot; alt=&quot;Screen Shot 2020-11-26 at 08.39.22&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;You will know that you have successfully forked the repository when the &lt;strong&gt;repository owner has changed&lt;/strong&gt; into your name (Labelled 2 in the previous image). Notice the fork icon beside your name.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image2.png&quot; alt=&quot;Screen Shot 2020-11-26 at 08.46.46&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The &lt;strong&gt;original repository&lt;/strong&gt; (the one you forked) is called the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;, while your &lt;strong&gt;forked repository&lt;/strong&gt; (the one with your name on it) is called the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;2-cloning-your-forked-repository&quot;&gt;2. Cloning Your Forked Repository&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Locate the &lt;strong&gt;“(download) Code”&lt;/strong&gt; button (Labelled 1 in the image), click it and &lt;strong&gt;click the clickboard&lt;/strong&gt; icon (Labelled 2 in the image) to copy the repository link.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image3.png&quot; alt=&quot;Screen Shot 2020-11-26 at 08.50.37&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In your terminal, cd into the folder where you want to store your repository and type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git clone &lt;/code&gt; and &lt;strong&gt;paste the link that you copied&lt;/strong&gt;. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; into your newly cloned repository, and type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; to verify that you have successfully cloned the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone &amp;lt;your_repository &lt;span class=&quot;nb&quot;&gt;link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &amp;lt;your_repository_name&amp;gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126090500035.png&quot; alt=&quot;image-20201126090500035&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;3-configure-your-commit-settings&quot;&gt;3. Configure Your Commit Settings&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Configure your commit settings&lt;/strong&gt; as follows:&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# To configure your user name:&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# git config user.name &quot;your_name_here&quot;&lt;/span&gt;
-git config user.name &lt;span class=&quot;s2&quot;&gt;&quot;Coco&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# To configure your user email:&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# git config user.email &quot;your_email@here&quot;&lt;/span&gt;
-git config user.email &lt;span class=&quot;s2&quot;&gt;&quot;coco@mymail.com&quot;&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# Type this to see if your changes has been reflected&lt;/span&gt;
-git config &lt;span class=&quot;nt&quot;&gt;--list&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;you can add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--global&lt;/code&gt; to configure your settings globally.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126091556921.png&quot; alt=&quot;image-20201126091556921&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Add your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;&lt;/strong&gt; by typing the command:&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;the link with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git&lt;/code&gt; can be copied from the &lt;strong&gt;HTTPS link on the “Clone button” of the original repository or the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image5.png&quot; alt=&quot;Screen Shot 2020-11-26 at 09.19.59&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Check your remote configurations&lt;/strong&gt; by typing:&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;p&gt;you should have a f&lt;strong&gt;etch and push for your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;&lt;/strong&gt; (your forked repository), and &lt;strong&gt;fetch and push for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;&lt;/strong&gt; (the main repository).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126092506283.png&quot; alt=&quot;image-20201126092506283&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;4-creating-a-new-branch&quot;&gt;4. Creating a New Branch&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;To &lt;strong&gt;create a new branch&lt;/strong&gt;, type&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; &amp;lt;branch_name&amp;gt; origin/main
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;checkout&lt;/code&gt; is a command that lets you switch branches&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-b&lt;/code&gt; tells git to create a new branch with the name of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;branch_name&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin/main&lt;/code&gt; tells git to copy the code from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; branch of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; to this newly created branch.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Push this branch to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;&lt;/strong&gt; so your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; would be updated. Type&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin &amp;lt;branch_name&amp;gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For this example, let’s create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list&lt;/code&gt; branch.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126100010900.png&quot; alt=&quot;image-20201126100010900&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;5-add-your-code-changes&quot;&gt;5. Add your code changes&lt;/h3&gt;
-
-&lt;p&gt;Edit the codebase as you normally would. In this tutorial we would create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list.txt&lt;/code&gt; and write a “Hello world” in it.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126100634148.png&quot; alt=&quot;image-20201126100634148&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To push these changes:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Check your edits&lt;/strong&gt; by typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git status&lt;/code&gt;, &lt;strong&gt;add these changes&lt;/strong&gt; to staging by typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git add .&lt;/code&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.&lt;/code&gt; means all. If you want you can specifiy what files you’d like to add). &lt;strong&gt;Commit this changes&lt;/strong&gt; with a message by typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git commit -m &quot;&amp;lt;your_message&amp;gt;&quot;&lt;/code&gt;. Finally, &lt;strong&gt;push these changes&lt;/strong&gt; to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; by typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push -u origin &amp;lt;branch_name&amp;gt;&lt;/code&gt;. In summary,&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git status
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;your_message_here&amp;gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin &amp;lt;branch_name&amp;gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126101659390.png&quot; alt=&quot;image-20201126101659390&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Your edits &lt;strong&gt;should now reflect&lt;/strong&gt; on your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; on the github page. Verify our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list.txt&lt;/code&gt; is now in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126101616443.png&quot; alt=&quot;image-20201126101616443&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;6-updating-local-repository-from-upstream&quot;&gt;6. Updating local repository from upstream&lt;/h3&gt;
-
-&lt;p&gt;When contributing to a project, it is high likely that your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt; repository is behind the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt; as many developers would merge their changes to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt; (or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;development&lt;/code&gt;) branch of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;. Before requesting for a pull request, we should update our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt; repositories based on the changes of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;upstream&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;In this example, while we were editing our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list.txt&lt;/code&gt; the main repository has already updated.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126102628675.png&quot; alt=&quot;image-20201126102628675&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To update our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;, we can update our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; branch by:&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &amp;lt;main_branch_name&amp;gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git fetch upstream
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge upstream/&amp;lt;main_branch_name&amp;gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin &amp;lt;origin_main_branch_name&amp;gt;:&amp;lt;local_main_branch_name&amp;gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126103933926.png&quot; alt=&quot;image-20201126103933926&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126104016284.png&quot; alt=&quot;image-20201126104016284&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126104059694.png&quot; alt=&quot;image-20201126104059694&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;7-updating-our-local-branch---rebase&quot;&gt;7. Updating our local branch - REBASE&lt;/h3&gt;
-
-&lt;p&gt;Our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list&lt;/code&gt; branch is now behind our local &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; branch (which was just recently updated, see section 6). We also need to &lt;strong&gt;update this branch&lt;/strong&gt; by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rebasing&lt;/code&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &amp;lt;branch_name&amp;gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git fetch origin
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rebase origin/&amp;lt;main_branch&amp;gt;
-&lt;span class=&quot;c&quot;&gt;# rebase your codes&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rebase &lt;span class=&quot;nt&quot;&gt;--continue&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;#after rebasing, update origin branch&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; origin &amp;lt;branch_name&amp;gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126105058574.png&quot; alt=&quot;image-20201126105058574&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;8-creating-a-pull-request&quot;&gt;8. Creating a pull request&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;You can create pull requests by &lt;strong&gt;navigating in the branch that you were developing&lt;/strong&gt; (in our case, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list&lt;/code&gt; Labelled 2 in the image) and clicking the “Compare &amp;amp; pull request” button (Labelled 1 in the image).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image4.png&quot; alt=&quot;Screen Shot 2020-11-26 at 10.54.47&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Edit the pull request title and the description based on the specifications of the project you are contributing to, and click &lt;strong&gt;“Create pull request”&lt;/strong&gt;.
-&lt;img src=&quot;/img/in-post/git-contribution-walkthrough/image-20201126105846976.png&quot; alt=&quot;image-20201126105846976&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Congratulations!&lt;/strong&gt; You just created your pull request. Pull request reviewers will review your code and add comments for you to change.&lt;/p&gt;
-
-&lt;h3 id=&quot;9-updating-pull-requests&quot;&gt;9. Updating Pull Requests&lt;/h3&gt;
-
-&lt;p&gt;Expect that your pull requests will not be merged immediately, it might take hours, days, weeks, even months. (Or it might not be merged at all).&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Always update your pull requests by following from step 6&lt;/strong&gt;, as outdated PRs will not be merged due to merge conflicts. Your reviewer might ask you to update your PR once it is ready for merging.&lt;/p&gt;
-
-&lt;h3 id=&quot;10-create-another-contribution&quot;&gt;10. Create another contribution!&lt;/h3&gt;
-
-&lt;p&gt;You’ve done it! &lt;strong&gt;You can create another contribution by following from step 2&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;your-turn&quot;&gt;Your turn&lt;/h3&gt;
-
-&lt;p&gt;Time get hands on. Fork &lt;a href=&quot;https://github.com/MREstepa/git-contribution-walkthrough&quot;&gt;this repository&lt;/a&gt; and contribute by adding you name (or your pet’s name), your favorite phrase, or whatever you want in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;greetings_list.txt&lt;/code&gt;. I might have spelling and grammatical errors, feel free to edit them.&lt;/p&gt;
-
-&lt;p&gt;I’ve compiled the commands in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;commands.txt&lt;/code&gt; for your reference. I’ve also added the command for deleting branch in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;local&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;origin&lt;/code&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;MREstepa&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 09 Dec 2020 00:00:00 +0800</pubDate>
-        <link>https://mrestepa.com/2020/12/09/git-contribution-walkthrough/</link>
-        <guid isPermaLink="true">https://mrestepa.com/2020/12/09/git-contribution-walkthrough/</guid>
-        
-        <category>Git</category>
         
         
       </item>

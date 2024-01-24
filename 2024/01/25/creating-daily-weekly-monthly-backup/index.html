@@ -11,33 +11,30 @@
     <meta name="theme-color" content="#000000">
 
     <meta property="og:title"
-        content="DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth - Programming Notes">
+        content="Creating Scheduled Automatic Daily, Weekly, and Monthly Backup - Programming Notes">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="This document is a guide for creating a user handling feature - specifically user registration, login, logout, and password reset for Django with DjangoRestFramework. This can be a continuation of ...">
+    <meta property="og:description" content="A guide for creating backup scripts and scheduling them to run daily, weekly, and monthly.
+">
     
-    <meta property="article:published_time" content=" 2022-05-11T00:00:00Z">
+    <meta property="article:published_time" content=" 2024-01-25T00:00:00Z">
     
     
     <meta property="article:author" content="Ray">
     
     
-    <meta property="article:tag" content="Django">
-    
-    <meta property="article:tag" content="PostgreSQL">
-    
-    <meta property="article:tag" content="djangorestframework">
+    <meta property="article:tag" content="backup">
     
     
     <meta property="og:image" content="https://mrestepa.comhttps://github.com/mrestepa.png">
-    <meta property="og:url" content="https://mrestepa.com/2022/05/11/drf-user-registration-login-logout-password/">
+    <meta property="og:url" content="https://mrestepa.com/2024/01/25/creating-daily-weekly-monthly-backup/">
     <meta property="og:site_name" content="Programming Notes">
 
-    <title>DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth - Programming Notes</title>
+    <title>Creating Scheduled Automatic Daily, Weekly, and Monthly Backup - Programming Notes</title>
 
     
     <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://mrestepa.com/2022/05/11/drf-user-registration-login-logout-password/">
+    <link rel="canonical" href="https://mrestepa.com/2024/01/25/creating-daily-weekly-monthly-backup/">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/custom.min.css">
 
@@ -185,17 +182,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Django" title="Django">Django</a>
-                        
-                        <a class="tag" href="/archive/?tag=PostgreSQL" title="PostgreSQL">PostgreSQL</a>
-                        
-                        <a class="tag" href="/archive/?tag=djangorestframework" title="djangorestframework">djangorestframework</a>
+                        <a class="tag" href="/archive/?tag=backup" title="backup">backup</a>
                         
                     </div>
-                    <h1>DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with dj-rest-auth and django-allauth</h1>
+                    <h1>Creating Scheduled Automatic Daily, Weekly, and Monthly Backup</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Ray on May 11, 2022</span>
+                    <span class="meta">Posted by Ray on January 25, 2024</span>
                 </div>
             </div>
         </div>
@@ -219,209 +212,141 @@
 
                 
 
-				<p>This document is a guide for creating a user handling feature - specifically user registration, login, logout, and password reset for Django with DjangoRestFramework. This can be a continuation of the previous walkthrough: “Dockerized Django and PostgreSQL Setup for REST API through DjangoRestFramework (DRF)”.</p>
+				<p>A guide for creating backup scripts and scheduling them to run daily, weekly, and monthly.</p>
 
-<h2 id="pre-requisites">Pre-requisites</h2>
+<h2 id="creating-backup-scripts">Creating Backup Scripts</h2>
 <ol>
-  <li>Python</li>
-  <li>Docker</li>
+  <li>Create a backup directory to store the backup scripts and files, and navigate into this directory.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">mkdir </span>backups <span class="o">&amp;&amp;</span> <span class="nb">cd </span>backups
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Create <code class="language-plaintext highlighter-rouge">daily</code>, <code class="language-plaintext highlighter-rouge">weekly</code>, and <code class="language-plaintext highlighter-rouge">monthly</code> directories to store backups.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">mkdir </span>daily weekly monthly
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Create a backup scripts to run.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="c"># nano &lt;name&gt;-backup.sh; example:</span>
+ <span class="nv">$ </span>nano daily-backup.sh
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
 </ol>
 
-<h1 id="install-dj-rest-auth-for-user-loginlogoutpassword-reset">Install dj-rest-auth for user login/logout/password reset</h1>
+<p><img src="/img/in-post/creating-daily-weekly-monthly-backup/setup.png" alt="setup" /></p>
 
-<p>We use <code class="language-plaintext highlighter-rouge">dj-rest-auth</code> since it is currently maintained compared to the <code class="language-plaintext highlighter-rouge">django-rest-auth</code> having its maintenance paused.</p>
+<ol>
+  <li>Type the following code:
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="nb">tar</span> <span class="nt">-zcf</span> &lt;store_backup_dir&gt;/&lt;backup_file_name&gt;-<span class="si">$(</span><span class="nb">date</span> +%Y%m%d<span class="si">)</span>.tar.gz <span class="nt">-C</span> &lt;file_or_folder_dir&gt; &lt;file_or_folder_to_backup&gt;
+ find &lt;store_backup_dir&gt;/<span class="k">*</span> <span class="nt">-mtime</span> +&lt;num_of_days&gt; <span class="nt">-delete</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>The first line has the commands:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">tar</code> compresses files to a tar format</li>
+      <li><code class="language-plaintext highlighter-rouge">-zcf</code> means g<strong><em>z</em></strong>ip <strong><em>c</em></strong>ompress into a <strong><em>f</em></strong>ile</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;store_backup_dir&gt;</code> implies the full path to the directory where you want to store the backup file</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;backup_file_name&gt;</code> implies the name of the backup file</li>
+      <li><code class="language-plaintext highlighter-rouge">$(date +%Y%m%d)</code> appends the current date of when the backup file is generated</li>
+      <li><code class="language-plaintext highlighter-rouge">.tar.gz</code> is the backup file extension</li>
+      <li><code class="language-plaintext highlighter-rouge">-C</code> means change directory to where the file to be backed up is located</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;file_or_folder_dir&gt;</code>implies the full path to the directory where the file of folder to back up is located</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;file_or_folder_to_backup&gt;</code> is the name of the file or folder to be backed up</li>
+    </ul>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    <p>The second line has the commands:</p>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">find</code> searches files</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;store_backup_dir&gt;/*</code> refers to all backup files located in the backup folder</li>
+      <li><code class="language-plaintext highlighter-rouge">-mtime +</code> to filter files created <num_of_days> ago</num_of_days></li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;num_of_days&gt;</code> specifies the number of days to filter</li>
+      <li><code class="language-plaintext highlighter-rouge">-delete</code> command that deletes old backup files that were filtered</li>
+    </ul>
+
+    <p>example using daily backup:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre> <span class="c"># Daily backup for last 7 days</span>
+ <span class="nb">tar</span> <span class="nt">-zcf</span> /Users/ray/Desktop/backups/daily/backup-<span class="si">$(</span><span class="nb">date</span> +%Y%m%d<span class="si">)</span>.tar.gz <span class="nt">-C</span> /Users/ray/Desktop/ assets/
+ find /Users/ray/Desktop/backups/daily/<span class="k">*</span> <span class="nt">-mtime</span> +7 <span class="nt">-delete</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<p><img src="/img/in-post/creating-daily-weekly-monthly-backup/daily_backup.png" alt="daily_backup" /></p>
+
+<ol>
+  <li>Run script to check if it works.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
-5
-</pre></td><td class="rouge-code"><pre><span class="c"># Install dj-rest-auth inside docker container</span>
-<span class="nv">$ </span>docker <span class="nb">exec </span>backend_api_web pipenv <span class="nb">install </span>dj-rest-auth
+</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>sh daily-backup.sh
+ <span class="nv">$ </span><span class="nb">cd </span>daily <span class="o">&amp;&amp;</span> <span class="nb">ls</span> <span class="c"># backup file should be created</span>
+ <span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-xzvf</span> backup-&lt;<span class="nb">date</span><span class="o">&gt;</span>.tar.gz
+ <span class="nv">$ </span><span class="nb">ls</span> <span class="c"># backup file should be extracted</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
 
-<span class="c"># when inside docker container, use the command:</span>
-<span class="nv">$ </span>pipenv <span class="nb">install </span>dj-rest-auth
-</pre></td></tr></tbody></table></code></pre></div></div>
+<p><img src="/img/in-post/creating-daily-weekly-monthly-backup/script_working.png" alt="script_working" /></p>
 
-<p>Add newly installed applications into <code class="language-plaintext highlighter-rouge">config/settings.py</code></p>
+<ol>
+  <li>
+    <p>Repeat steps 3 to 5 for weekly and monthly scripts. Input your desired number of days to filter in <code class="language-plaintext highlighter-rouge">&lt;num_of_days&gt;</code> parameter. Weekly backup for the last 5 weeks would be <code class="language-plaintext highlighter-rouge">+31</code>, and monthly backup for the last 5 months would be <code class="language-plaintext highlighter-rouge">+100</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    <p>Example for weekly:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-11
-</pre></td><td class="rouge-code"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">...,</span>
-    <span class="c1"># Third-party
-</span>
-    <span class="sh">'</span><span class="s">rest_framework</span><span class="sh">'</span><span class="p">,</span>
+</pre></td><td class="rouge-code"><pre> <span class="c"># Weekly backup for last 5 weeks</span>
+ <span class="nb">tar</span> <span class="nt">-zcf</span> /Users/ray/Desktop/backups/weekly/backup-<span class="si">$(</span><span class="nb">date</span> +%Y%m%d<span class="si">)</span>.tar.gz <span class="nt">-C</span> /Users/ray/Desktop/ assets/
+ find /Users/ray/Desktop/backups/weekly/<span class="k">*</span> <span class="nt">-mtime</span> +100 <span class="nt">-delete</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
 
-    <span class="c1"># Authentication  # new
-</span>    <span class="sh">'</span><span class="s">rest_framework.authtoken</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">dj_rest_auth</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="bp">...</span>
-<span class="p">)</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Import <code class="language-plaintext highlighter-rouge">include</code> in <code class="language-plaintext highlighter-rouge">config/urls.py</code> and, modify the urls:</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    <p>Example for monthly:</p>
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre><span class="c1"># config/urls.py
-</span><span class="kn">from</span> <span class="n">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
-<span class="kn">from</span> <span class="n">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+</pre></td><td class="rouge-code"><pre> <span class="c"># Monthly backup for last 4 months</span>
+ <span class="nb">tar</span> <span class="nt">-zcf</span> /Users/ray/Desktop/backups/monthly/backup-<span class="si">$(</span><span class="nb">date</span> +%Y%m%d<span class="si">)</span>.tar.gz <span class="nt">-C</span> /Users/ray/Desktop/ assets/
+ find /Users/ray/Desktop/backups/monthly/<span class="k">*</span> <span class="nt">-mtime</span> +100 <span class="nt">-delete</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
 
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="nf">path</span><span class="p">(</span><span class="sh">'</span><span class="s">admin/</span><span class="sh">'</span><span class="p">,</span> <span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">urls</span><span class="p">),</span>
-
-    <span class="c1"># Authentication
-</span>    <span class="nf">path</span><span class="p">(</span><span class="sh">'</span><span class="s">auth/</span><span class="sh">'</span><span class="p">,</span> <span class="nf">include</span><span class="p">(</span><span class="sh">'</span><span class="s">dj_rest_auth.urls</span><span class="sh">'</span><span class="p">)),</span>
-<span class="p">]</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Stop (<code class="language-plaintext highlighter-rouge">ctrl + c</code>) and rebuild the docker container (using terminal1).</p>
-
-<p>Migrate the changes</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+<h2 id="schedule-script-execution-using-cron">Schedule Script Execution Using Cron</h2>
+<ol>
+  <li>Type <code class="language-plaintext highlighter-rouge">crontab -e</code> in the terminal</li>
+  <li>Schedule your script to run at specific times. Use https://crontab.cronhub.io/ for easier cron creation
+ Example:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="c"># Migrate changes</span>
-<span class="nv">$ </span>docker <span class="nb">exec </span>backend_api_web python manage.py migrate
-
-<span class="c"># when inside docker container, use the command:</span>
-<span class="nv">$ </span>python manage.py migrate
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h2 id="install-django-allauth-for-user-registration">Install django-allauth for user registration</h2>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre><span class="c"># Install dj-rest-auth[with_social]</span>
-<span class="nv">$ </span>docker <span class="nb">exec </span>backend_api_web pipenv <span class="nb">install</span> <span class="s1">'dj-rest-auth[with_social]'</span>
-
-<span class="c"># when inside docker container, use the command:</span>
-<span class="nv">$ </span>pipenv <span class="nb">install</span> <span class="s1">'dj-rest-auth[with_social]'</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Add <code class="language-plaintext highlighter-rouge">SITE_ID = 1</code> and newly installed applications into <code class="language-plaintext highlighter-rouge">config/settings.py</code>,</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="p">...,</span>
-    <span class="sh">'</span><span class="s">django.contrib.staticfiles</span><span class="sh">'</span><span class="p">,</span>
-
-    <span class="c1"># Authentication
-</span>    <span class="sh">'</span><span class="s">django.contrib.sites</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">allauth</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">allauth.account</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">allauth.socialaccount</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">dj_rest_auth.registration</span><span class="sh">'</span><span class="p">,</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">rest_framework</span><span class="sh">'</span><span class="p">,</span>
-    <span class="bp">...</span>
-<span class="p">)</span>
-
-<span class="n">SITE_ID</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># new
-</span><span class="bp">...</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Add registration path to <code class="language-plaintext highlighter-rouge">config/urls.py</code></p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-</pre></td><td class="rouge-code"><pre><span class="c1"># config/urls.py
-</span><span class="bp">...</span>
-
-<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="bp">...</span>
-    <span class="nf">path</span><span class="p">(</span><span class="sh">'</span><span class="s">auth/</span><span class="sh">'</span><span class="p">,</span> <span class="nf">include</span><span class="p">(</span><span class="sh">'</span><span class="s">dj_rest_auth.urls</span><span class="sh">'</span><span class="p">)),</span>
-    <span class="nf">path</span><span class="p">(</span><span class="sh">'</span><span class="s">auth/registration/</span><span class="sh">'</span><span class="p">,</span> <span class="nf">include</span><span class="p">(</span><span class="sh">'</span><span class="s">dj_rest_auth.registration.urls</span><span class="sh">'</span><span class="p">)),</span>  <span class="c1"># new
-</span><span class="p">]</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Stop (<code class="language-plaintext highlighter-rouge">ctrl + c</code>) and rebuild the docker container (using terminal1).<br />
-Apply migrations <br />
-Add <code class="language-plaintext highlighter-rouge">REST_FRAMEWORK</code> settings on <code class="language-plaintext highlighter-rouge">config/settings.py</code></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-</pre></td><td class="rouge-code"><pre><span class="c1"># config/settings.py
-</span><span class="bp">...</span>
-<span class="n">REST_FRAMEWORK</span> <span class="o">=</span> <span class="p">{</span>  <span class="c1"># new
-</span>    <span class="sh">'</span><span class="s">DEFAULT_AUTHENTICATION_CLASSES</span><span class="sh">'</span><span class="p">:</span> <span class="p">[</span>
-        <span class="sh">'</span><span class="s">rest_framework.authentication.TokenAuthentication</span><span class="sh">'</span><span class="p">,</span>
-    <span class="p">]</span>
-<span class="p">}</span>
-
-<span class="n">SITE_ID</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="bp">...</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
+</pre></td><td class="rouge-code"><pre> 15 0 1 <span class="k">*</span> <span class="k">*</span> sh &lt;path_to_script&gt;/backup-monthly.sh
+ 15 0 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> sh &lt;path_to_script&gt;/backup-daily.sh
+ 15 0 <span class="k">*</span> <span class="k">*</span> 1 sh &lt;path_to_script&gt;/backup-weekly.sh
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Save and exit file</li>
+  <li>Check backup files after a few days to verify if worked.</li>
+</ol>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2022/04/05/dockerized-django-postgresql-setup/" data-toggle="tooltip" data-placement="top" title="Dockerized Django and PostgreSQL Setup for REST API through DjangoRestFramework (DRF)">
+                        <a href="/2024/01/24/sftp-basic-commands/" data-toggle="tooltip" data-placement="top" title="Secure File Transfer Protocol (SFTP) Basic Terminal Commands">
                         Previous<br>
-                        <span>Dockerized Django and PostgreSQL Setup for REST API through DjangoRestFramework (DRF)</span>
+                        <span>Secure File Transfer Protocol (SFTP) Basic Terminal Commands</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2023/07/15/install-docker-compose-ubuntu/" data-toggle="tooltip" data-placement="top" title="How To Install docker and docker-compose in Ubuntu Server">
-                        Next<br>
-                        <span>How To Install docker and docker-compose in Ubuntu Server</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
