@@ -5,9 +5,139 @@
     <description>A collection of my programming notes for everybody&apos;s reference</description>
     <link>https://mrestepa.com/</link>
     <atom:link href="https://mrestepa.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 05 Jan 2024 14:15:04 +0800</pubDate>
-    <lastBuildDate>Fri, 05 Jan 2024 14:15:04 +0800</lastBuildDate>
+    <pubDate>Wed, 24 Jan 2024 10:10:48 +0800</pubDate>
+    <lastBuildDate>Wed, 24 Jan 2024 10:10:48 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
+    
+      <item>
+        <title>Secure File Transfer Protocol (SFTP) Basic Terminal Commands</title>
+        <description>&lt;p&gt;A guide for SFTP basic terminal commands.&lt;/p&gt;
+
+&lt;h2 id=&quot;connect-to-host&quot;&gt;Connect to Host&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Open up terminal, and connect to host using the command:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# sftp &amp;lt;username&amp;gt;@&amp;lt;host_name_or_ip_address&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sftp mrestepa@XXX.XXX.XX.XXX
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/sftp-basic-commands/sftp.png&quot; alt=&quot;sftp&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;performing-commands&quot;&gt;Performing Commands&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;To perform commands in remote host, type the commands directly into the terminal as usual.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sftp&amp;gt; &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;To perform commands in local computer, type the commands in the terminal after typing “l”
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sftp&amp;gt; lpwd
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/in-post/sftp-basic-commands/sftpcommand.png&quot; alt=&quot;sftp&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;downloading-file-from-remote-to-local&quot;&gt;Downloading File From Remote to Local&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Navigate into the remote directory where the file is stored.&lt;/li&gt;
+  &lt;li&gt;Navigate into the local directory where you want to store the downloaded file.&lt;/li&gt;
+  &lt;li&gt;Type command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get &amp;lt;name of file&amp;gt; .&lt;/code&gt;. The first parameter is the name and location of the file in remote host, and the 2nd parameter is the downloaded file path and name in local.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# get -r &amp;lt;remote_path_and_filename&amp;gt; &amp;lt;local_path_and_filename&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;get samplefile.txt &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Steps 1 and 2 can be skipped, but include the full path and name of the remote file to download, and full path of local directory to store the file.&lt;/li&gt;
+  &lt;li&gt;The downloaded file can be renamed in the 2nd parameter by specifying the new name:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;get samplefile.txt newname.txt
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;downloading-folder-from-remote-to-local&quot;&gt;Downloading Folder From Remote to Local&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Navigate into the remote directory where the folder is stored.&lt;/li&gt;
+  &lt;li&gt;Navigate into the local directory where you want to store the downloaded folder.&lt;/li&gt;
+  &lt;li&gt;Type command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;get -r &amp;lt;name of folder&amp;gt; .&lt;/code&gt;. The first parameter is the name and location of the folder in remote host, and the 2nd parameter is the downloaded folder path and name in local.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# get -r &amp;lt;remote_path&amp;gt; &amp;lt;local_path&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;get &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; media/ &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Steps 1 and 2 can be skipped, but include the full path and name of the remote folder to download, and full path of local directory to store the folder.&lt;/li&gt;
+  &lt;li&gt;The downloaded folder can be renamed in the 2nd parameter by specifying the new name:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;get &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; media/ media-backup/
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;uploading-file-from-local-to-remote&quot;&gt;Uploading File From Local to Remote&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Navigate into the local directory where the file is stored.&lt;/li&gt;
+  &lt;li&gt;Navigate into the remote directory where you want to store the uploaded file.&lt;/li&gt;
+  &lt;li&gt;Type command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;put &amp;lt;name of file&amp;gt; .&lt;/code&gt;. The first parameter is the name and location of the file in local computer, and the 2nd parameter is the uploaded file path and name in remote.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# put &amp;lt;local_path_and_filename&amp;gt; &amp;lt;remote_path_and_filename&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;put samplefile.txt &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Steps 1 and 2 can be skipped, but include the full path and name of the remote file to download, and full path of local directory to store the file.&lt;/li&gt;
+  &lt;li&gt;The downloaded file can be renamed in the 2nd parameter by specifying the new name:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;put samplefile.txt newname.txt
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;uploading-folder-from-local-to-remote&quot;&gt;Uploading Folder From Local to Remote&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;Navigate into the local directory where the folder is stored.&lt;/li&gt;
+  &lt;li&gt;Navigate into the remote directory where you want to store the uploaded folder.&lt;/li&gt;
+  &lt;li&gt;Type command &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;put -r &amp;lt;name of folder&amp;gt; .&lt;/code&gt;. The first parameter is the name and location of the folder in local computer, and the 2nd parameter is the uploaded folder path and name in remote.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;c&quot;&gt;# put -r &amp;lt;local_path_and_foldername&amp;gt; &amp;lt;remote_path_and_foldername&amp;gt;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;put &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; mediabackup/ &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Steps 1 and 2 can be skipped, but include the full path and name of the remote file to download, and full path of local directory to store the file.&lt;/li&gt;
+  &lt;li&gt;The downloaded file can be renamed in the 2nd parameter by specifying the new name:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;put &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; mediabackup/ media/
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Wed, 24 Jan 2024 00:00:00 +0800</pubDate>
+        <link>https://mrestepa.com/2024/01/24/sftp-basic-commands/</link>
+        <guid isPermaLink="true">https://mrestepa.com/2024/01/24/sftp-basic-commands/</guid>
+        
+        <category>terminal</category>
+        
+        
+      </item>
     
       <item>
         <title>Dockerized React in Development and Production Settings</title>
@@ -2180,335 +2310,6 @@ git config &lt;span class=&quot;nt&quot;&gt;--list&lt;/span&gt;
         <guid isPermaLink="true">https://mrestepa.com/2020/12/09/git-contribution-walkthrough/</guid>
         
         <category>Git</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail &amp; Bitbucket</title>
-        <description>&lt;p&gt;This document is a guide for creating CI/CD Pipeline with AWS CodeDeploy, CodePipeline, Amazon Lightsail, and Bitbucket.&lt;/p&gt;
-
-&lt;p&gt;Guide from the official AWS Compute Blog: &lt;a href=&quot;https://aws.amazon.com/blogs/compute/using-aws-codedeploy-and-aws-codepipeline-to-deploy-applications-to-amazon-lightsail/&quot;&gt;Using AWS CodeDeploy, AWS CodePipiline, and Amazon Lightsail&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetupVariables.txt&lt;/code&gt; file and copy contents of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetupBootstrap.txt&lt;/code&gt; to your newly created file. (&lt;a href=&quot;https://gist.github.com/MREstepa/117fd302c1e3a3c82a2b69d59fec9c37#file-setupbootstrap-txt&quot;&gt;Link to SetupBootstrap.&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;A Bitbucket Account.&lt;/li&gt;
-  &lt;li&gt;Git installed in your local machine.&lt;/li&gt;
-  &lt;li&gt;AWS account with previledges to create resources.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;***Note: Copy the role names and other information in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetupVariable.txt&lt;/code&gt; file for your reference.&lt;/p&gt;
-
-&lt;h3 id=&quot;create-iam-service-role&quot;&gt;Create IAM service role&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Navigate to &lt;strong&gt;&lt;a href=&quot;https://console.aws.amazon.com/iam/home?#/roles&quot;&gt;AWS Identity Access Management (IAM)&lt;/a&gt;&lt;/strong&gt; and &lt;strong&gt;create a service role&lt;/strong&gt; with the following information:
-    &lt;ul&gt;
-      &lt;li&gt;Type of trusted entity: &lt;strong&gt;AWS service&lt;/strong&gt;;&lt;/li&gt;
-      &lt;li&gt;Use case service: &lt;strong&gt;CodeDeploy&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;Use case: &lt;strong&gt;CodeDeploy&lt;/strong&gt;
-and click &lt;strong&gt;Next&lt;/strong&gt; until the **Create role **page is reached&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_service_role1.png&quot; alt=&quot;create_service_role1&quot; /&gt;
-&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_service_role2.png&quot; alt=&quot;create_service_role2&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;On the &lt;strong&gt;Create Role&lt;/strong&gt; Page, enter your role name. (for example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxCodeDeployServiceRole&lt;/code&gt;) and click &lt;strong&gt;Create role&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_service_role3.png&quot; alt=&quot;create_service_role3&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;create-an-s3-bucket&quot;&gt;Create an S3 bucket&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Navigate to &lt;strong&gt;&lt;a href=&quot;s3.console.aws.amazon.com/s3/home&quot;&gt;Amazon S3 Bucket Console&lt;/a&gt;&lt;/strong&gt; and create a bucket by &lt;strong&gt;filling up the Bucket name&lt;/strong&gt; (rxxxxlightsailbucket) and &lt;strong&gt;selecting a region&lt;/strong&gt;. Click &lt;strong&gt;Next&lt;/strong&gt; to proceed.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_s3_bucket1.png&quot; alt=&quot;create_s3_bucket1&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Make sure that the &lt;strong&gt;Block &lt;em&gt;all&lt;/em&gt; public access&lt;/strong&gt; is &lt;strong&gt;checked&lt;/strong&gt;. Click &lt;strong&gt;Next&lt;/strong&gt; until &lt;strong&gt;Create bucket&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_s3_bucket2.png&quot; alt=&quot;create_s3_bucket2&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;create-an-iam-policy&quot;&gt;Create an IAM Policy&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Navigate to the &lt;strong&gt;&lt;a href=&quot;https://console.aws.amazon.com/iam/&quot;&gt;Policy&lt;/a&gt;&lt;/strong&gt; Section of the AWS Management Console and &lt;strong&gt;Create a Policy&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click on the &lt;strong&gt;JSON&lt;/strong&gt; tab and paste the code from below:&lt;/p&gt;
-
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Version&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;2012-10-17&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Statement&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Effect&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Allow&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Action&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;s3:*&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;codedeploy:*&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;Resource&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-                &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;*&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-            &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click &lt;strong&gt;Review Policy&lt;/strong&gt;, &lt;strong&gt;enter your policy name&lt;/strong&gt;. (For this example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxCodeDeployS3BucketPolicy&lt;/code&gt;), and click &lt;strong&gt;Create policy&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_iam_policy.png&quot; alt=&quot;create_iam_policy&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;create-an-iam-user&quot;&gt;Create an IAM User&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In the same IAM Console, &lt;strong&gt;click on Users&lt;/strong&gt;, and &lt;strong&gt;Add User&lt;/strong&gt;. Input your desired  &lt;strong&gt;IAM User name&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxLightsailCodeDeployUser&lt;/code&gt; in this example), and &lt;strong&gt;check Programmatic access&lt;/strong&gt;. &lt;strong&gt;Click Next: Permissions&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_iam_user1.png&quot; alt=&quot;create_iam_user1&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Click &lt;strong&gt;Attach existing policies directly&lt;/strong&gt;. Enter the policy name you have created earlier (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxCodeDeployS3BucketPolicy&lt;/code&gt;), and &lt;strong&gt;click the checkbox next to it&lt;/strong&gt;. Click &lt;strong&gt;Next&lt;/strong&gt; until IAM User is created.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_iam_user2.png&quot; alt=&quot;create_iam_user2&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Click &lt;strong&gt;Show&lt;/strong&gt; in the &lt;strong&gt;Secret access key column&lt;/strong&gt;. Copy your &lt;strong&gt;Access key ID&lt;/strong&gt;, and &lt;strong&gt;Secret access key&lt;/strong&gt; and paste it in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetupVariables.txt&lt;/code&gt;. Click &lt;strong&gt;Download .csv&lt;/strong&gt;, and click close.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_iam_user3.png&quot; alt=&quot;create_iam_user3&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Click on your newly created IAM User. Copy the &lt;strong&gt;User ARN&lt;/strong&gt; and paste it in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;SetupVariables.txt&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;create-a-lightsail-instance&quot;&gt;Create a Lightsail Instance&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Navigate to &lt;a href=&quot;https://lightsail.aws.amazon.com/&quot;&gt;Lightsail home page&lt;/a&gt; in the AWS Management Console, and &lt;strong&gt;Create an Instance&lt;/strong&gt; by clicking &lt;strong&gt;create instance&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Pick an &lt;strong&gt;Instance Location&lt;/strong&gt; (&lt;em&gt;ap-southeast-1a&lt;/em&gt; in this example). Select &lt;strong&gt;Linux/Unix&lt;/strong&gt; Platform, and &lt;strong&gt;Amazon Linux 2&lt;/strong&gt; Blueprint from &lt;strong&gt;OS Only&lt;/strong&gt; tab.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_lightsail1.png&quot; alt=&quot;create_lightsail1&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Scroll down and click &lt;strong&gt;+ Add launch script&lt;/strong&gt;. Input your &lt;strong&gt;Access Key ID, Secret Access Key, IAM USER ARN, and Desired Region (without the trailing ‘a’)&lt;/strong&gt; in the code below.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /etc/codedeploy-agent/conf
-   
-&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; &amp;gt;&amp;gt; /etc/codedeploy-agent/conf/codedeploy.onpremises.yml
----
-aws_access_key_id: your_access_key_id
-aws_secret_access_key: your_secret_access_key
-iam_user_arn: your_iam_user_arn
-region: your_desired_region
-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT
-   
-&lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; wget ruby
-   
-wget &lt;span class=&quot;nt&quot;&gt;-N&lt;/span&gt; https://aws-codedeploy-us-west-2.s3.us-west-2.amazonaws.com/latest/install
-   
-&lt;span class=&quot;nb&quot;&gt;chmod&lt;/span&gt; +x ./install
-   
-&lt;span class=&quot;nb&quot;&gt;env &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AWS_REGION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;your_region ./install rpm
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Click &lt;strong&gt;Change SSH Key Pair&lt;/strong&gt;, and &lt;strong&gt;Download the default ssh key&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Check&lt;/strong&gt; the &lt;strong&gt;Enable Automatic Snapshots&lt;/strong&gt;, and &lt;strong&gt;set timezone&lt;/strong&gt; to PST, and to your desired time.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/create_lightsail2.png&quot; alt=&quot;create_lightsail2&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Input your instance name under &lt;strong&gt;Identify your instance&lt;/strong&gt;, and click &lt;strong&gt;Create Instance&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;verify-the-codedeploy-agent&quot;&gt;Verify the CodeDeploy agent&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Start an SSH session by clicking the terminal icon to the next of the name of your instance.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/instance_terminal.png&quot; alt=&quot;instance_terminal&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Verify that the CodeDeploy agent is running&lt;/strong&gt; by typing&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service codedeploy-agent status
-&lt;span class=&quot;c&quot;&gt;# which should respond with: (the PID will be different)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# The AWS CodeDeploy agent is running as PID 3650&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/terminal1.png&quot; alt=&quot;terminal1&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Configure AWS in your local machine&lt;/strong&gt; with the command&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;aws configure
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;and &lt;strong&gt;input your AWS Access Key ID, AWS Secret Access Key, Default region name, and Default output format&lt;/strong&gt; as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;json&lt;/code&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In the code below, &lt;strong&gt;replace your_insance_name, your_iam_user_arn, your_region, your_key, and your_value,&lt;/strong&gt; with your Instance name, IAM User ARN, Region, and desired Key (in this example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Name&lt;/code&gt;) and Value (in this example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CodeDeployLightsailRxxxx&lt;/code&gt;), respectively:&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;aws deploy register-on-premises-instance &lt;span class=&quot;nt&quot;&gt;--instance-name&lt;/span&gt; your_insance_name &lt;span class=&quot;nt&quot;&gt;--iam-user-arn&lt;/span&gt; your_iam_user_arn &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; your_region
-
-aws deploy add-tags-to-on-premises-instances &lt;span class=&quot;nt&quot;&gt;--instance-names&lt;/span&gt; your_insance_name &lt;span class=&quot;nt&quot;&gt;--tags&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;Key&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;your_key,Value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;your_value &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; your_region
-
-aws deploy list-on-premises-instances &lt;span class=&quot;nt&quot;&gt;--region&lt;/span&gt; your_region
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;​				and paste it in a &lt;strong&gt;terminal session in your local machine&lt;/strong&gt;.
-​				The command should display an output like the one below:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;{
-&quot;instanceNames&quot;: [
-     &quot;Rxxxx-web&quot;
-  ]
-}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/terminal_local1.png&quot; alt=&quot;terminal_local1&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;setup-the-application-in-codedeploy&quot;&gt;Setup the application in CodeDeploy&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Navigate to &lt;a href=&quot;https://console.aws.amazon.com/codesuite/codedeploy/start&quot;&gt;CodeDeploy console&lt;/a&gt; and click &lt;strong&gt;Create Application&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Input your Application name&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxCodeDeployLightsail&lt;/code&gt; in this example), and under the &lt;strong&gt;Compute platform&lt;/strong&gt;, select &lt;strong&gt;EC2/On-premises&lt;/strong&gt;. Click &lt;strong&gt;Create application&lt;/strong&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click &lt;strong&gt;Create deployment group&lt;/strong&gt; in the &lt;strong&gt;Deployment groups section&lt;/strong&gt;, and enter your deployment group name (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxCodeDeployLightsailDeploymentGroup&lt;/code&gt; in this example) in the &lt;strong&gt;Deployment group name&lt;/strong&gt; field.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click on the text box for &lt;strong&gt;Enter a service role&lt;/strong&gt;, and click on the service role you created earlier.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/deployment_grp1.png&quot; alt=&quot;deployment_grp1&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Under the &lt;strong&gt;Environment Configuration&lt;/strong&gt;, check &lt;strong&gt;On-premise instances&lt;/strong&gt;, and enter your &lt;strong&gt;Key&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Name&lt;/code&gt;) and &lt;strong&gt;Value&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CodeDeployLightsailRxxxx&lt;/code&gt;) you created earlier.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/deployment_grp2.png&quot; alt=&quot;deployment_grp2&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/deployment_grp3.png&quot; alt=&quot;deployment_grp3&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Under &lt;strong&gt;Load balancer&lt;/strong&gt;, &lt;strong&gt;uncheck&lt;/strong&gt; &lt;strong&gt;Enable load balancing&lt;/strong&gt;, and click &lt;strong&gt;Create deployment group&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/deployment_grp4.png&quot; alt=&quot;deployment_grp4&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;setup-bitbucket-repository&quot;&gt;Setup Bitbucket Repository&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scripts/&lt;/code&gt; directory in the root directory and create three (3) bash scripts named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;install_dependecies&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;start_server&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stop_server&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Create an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;appspec.yml&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.html&lt;/code&gt; file in the root directory.&lt;/li&gt;
-  &lt;li&gt;Navigate to the &lt;a href=&quot;https://gist.github.com/MREstepa/117fd302c1e3a3c82a2b69d59fec9c37#file-bitbucketinitialization-txt&quot;&gt;SetupBootstrap Gist&lt;/a&gt; and copy the codes from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;BitbucketInitialization.txt&lt;/code&gt; for the respective files.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;setup-codepipeline&quot;&gt;Setup CodePipeline&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Navigate to the &lt;a href=&quot;http://.console.aws.amazon.com/codesuite/codepipeline/start&quot;&gt;CodePipeline Console&lt;/a&gt; and click &lt;strong&gt;Create Pipeline&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Enter your your desired &lt;strong&gt;Pipeline name&lt;/strong&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxxxxCodeDeployLightsailPipeline&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;On the &lt;strong&gt;Advanced Settings&lt;/strong&gt;, click &lt;strong&gt;Custom location&lt;/strong&gt; under the &lt;strong&gt;Artifact Store&lt;/strong&gt;. Select the S3 bucket you created earlier in the &lt;strong&gt;Bucket textbox&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/in-post/cicd-pipeline-with-aws-bitbucket/codepipeline.png&quot; alt=&quot;codepipeline&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Click &lt;strong&gt;Bitbucket&lt;/strong&gt; for the source provider, and continue to connect CodePipeline with Bitbucket&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Enter your &lt;strong&gt;Repository Name&lt;/strong&gt; and the &lt;strong&gt;Branch Name&lt;/strong&gt; that you want to connect to pipeline. Click &lt;strong&gt;Next&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Skip Build Stage&lt;/strong&gt;. Confirm Skip.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Choose &lt;strong&gt;AWS CodeDeploy&lt;/strong&gt; from &lt;strong&gt;Deploy provider&lt;/strong&gt; and make sure that the appropriate region is selected. For &lt;strong&gt;Application Name&lt;/strong&gt; and &lt;strong&gt;Deployment Group&lt;/strong&gt;, select the ones that you have created earlier.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Congratulations!&lt;/strong&gt; You have created a CI/CD Pipeline with AWS CodePipeline, AWS CodeDeploy, Amazon Lightsail, and Bitbucket.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 23 Nov 2020 00:00:00 +0800</pubDate>
-        <link>https://mrestepa.com/2020/11/23/cicd-pipeline-with-aws-bitbucket/</link>
-        <guid isPermaLink="true">https://mrestepa.com/2020/11/23/cicd-pipeline-with-aws-bitbucket/</guid>
-        
-        <category>AWS</category>
-        
-        <category>Bitbucket</category>
         
         
       </item>

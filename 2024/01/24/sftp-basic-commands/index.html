@@ -11,32 +11,30 @@
     <meta name="theme-color" content="#000000">
 
     <meta property="og:title"
-        content="Dockerized React in Development and Production Settings - Programming Notes">
+        content="Secure File Transfer Protocol (SFTP) Basic Terminal Commands - Programming Notes">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="This document is a guide for creating a react application in production and development environments inside a docker container.
+    <meta property="og:description" content="A guide for SFTP basic terminal commands.
 ">
     
-    <meta property="article:published_time" content=" 2024-01-04T00:00:00Z">
+    <meta property="article:published_time" content=" 2024-01-24T00:00:00Z">
     
     
     <meta property="article:author" content="Ray">
     
     
-    <meta property="article:tag" content="React">
-    
-    <meta property="article:tag" content="Docker">
+    <meta property="article:tag" content="terminal">
     
     
     <meta property="og:image" content="https://mrestepa.comhttps://github.com/mrestepa.png">
-    <meta property="og:url" content="https://mrestepa.com/2024/01/04/dockerized-react-production-and-development/">
+    <meta property="og:url" content="https://mrestepa.com/2024/01/24/sftp-basic-commands/">
     <meta property="og:site_name" content="Programming Notes">
 
-    <title>Dockerized React in Development and Production Settings - Programming Notes</title>
+    <title>Secure File Transfer Protocol (SFTP) Basic Terminal Commands - Programming Notes</title>
 
     
     <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://mrestepa.com/2024/01/04/dockerized-react-production-and-development/">
+    <link rel="canonical" href="https://mrestepa.com/2024/01/24/sftp-basic-commands/">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/custom.min.css">
 
@@ -184,15 +182,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=React" title="React">React</a>
-                        
-                        <a class="tag" href="/archive/?tag=Docker" title="Docker">Docker</a>
+                        <a class="tag" href="/archive/?tag=terminal" title="terminal">terminal</a>
                         
                     </div>
-                    <h1>Dockerized React in Development and Production Settings</h1>
+                    <h1>Secure File Transfer Protocol (SFTP) Basic Terminal Commands</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Ray on January 4, 2024</span>
+                    <span class="meta">Posted by Ray on January 24, 2024</span>
                 </div>
             </div>
         </div>
@@ -216,285 +212,136 @@
 
                 
 
-				<p>This document is a guide for creating a react application in production and development environments inside a docker container.</p>
+				<p>A guide for SFTP basic terminal commands.</p>
 
-<h2 id="pre-requisites">Pre-requisites</h2>
+<h2 id="connect-to-host">Connect to Host</h2>
 <ol>
-  <li>Node</li>
-  <li>Docker</li>
-</ol>
-
-<h2 id="check-if-node-and-docker-is-installed">Check if Node and Docker is installed</h2>
-<ol>
-  <li>Check if Node is installed
+  <li>Open up terminal, and connect to host using the command:
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>node <span class="nt">--version</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Check if Docker and docker-compose is installed
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>docker <span class="nt">--version</span> <span class="o">&amp;&amp;</span> docker-compose <span class="nt">--version</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-</ol>
-
-<p><img src="/img/in-post/dockerized-react-production-and-development/node_docker_version.png" alt="node_docker_version" /></p>
-
-<h2 id="create-initial-react-app">Create Initial React App</h2>
-<ol>
-  <li>Navigate to project directory, or create one if it does not exist.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">mkdir </span>todo_client <span class="o">&amp;&amp;</span> <span class="nb">cd </span>todo_client
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Create react application using create-react-app command. Do not forget the period (.)
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>npx create-react-app <span class="nb">.</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Verify if react app is working. Press ctrl+C to stop running server.
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>npm run start
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-</ol>
-
-<p><img src="/img/in-post/dockerized-react-production-and-development/create_react_app.png" alt="create_react_app" /></p>
-
-<h2 id="create-dockerfiles-and-docker-composeyml-files">Create Dockerfiles and docker-compose.yml files</h2>
-<ol>
-  <li>Create development and production Dockerfiles
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">touch </span>Dockerfile.dev <span class="o">&amp;&amp;</span> <span class="nb">touch </span>Dockerfile.prod
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Edit <code class="language-plaintext highlighter-rouge">Dockerfile.dev</code> with the following content:
-    <div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-</pre></td><td class="rouge-code"><pre> <span class="c"># Build development</span>
- FROM node:21-alpine
-
- WORKDIR /code/
-
- COPY public/ /code/public
- COPY src/ /code/src
- COPY package.json /code/
-
- RUN npm install
-
- CMD ["npm", "start"]
+</pre></td><td class="rouge-code"><pre> <span class="c"># sftp &lt;username&gt;@&lt;host_name_or_ip_address&gt;</span>
+ <span class="nv">$ </span>sftp mrestepa@XXX.XXX.XX.XXX
 </pre></td></tr></tbody></table></code></pre></div>    </div>
-    <p><img src="/img/in-post/dockerized-react-production-and-development/dockerfile_dev.png" alt="dockerfile_dev" /></p>
-  </li>
-  <li>Edit <code class="language-plaintext highlighter-rouge">Dockerfile.prod</code> with the following content:
-    <div class="language-Dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-</pre></td><td class="rouge-code"><pre> <span class="c"># Build production</span>
- FROM node:21-alpine
-
- WORKDIR /code/
-
- COPY public/ /code/public
- COPY src/ /code/src
- COPY package.json /code/
-
- RUN npm install
-
- RUN npm run build
- RUN npm install -g serve
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-    <p><img src="/img/in-post/dockerized-react-production-and-development/dockerfile_prod.png" alt="dockerfile_prod" /></p>
-  </li>
-  <li>Create development and production <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> files
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">touch </span>docker-compose-dev.yml <span class="o">&amp;&amp;</span> <span class="nb">touch </span>docker-compose-prod.yml
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Edit <code class="language-plaintext highlighter-rouge">docker-compose-dev.yml</code> with the following content:
-    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-</pre></td><td class="rouge-code"><pre> <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
-
- <span class="na">services</span><span class="pi">:</span>
-   <span class="na">react-app</span><span class="pi">:</span>
-     <span class="na">build</span><span class="pi">:</span>
-       <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
-       <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">./Dockerfile.dev</span>
-     <span class="na">image</span><span class="pi">:</span> <span class="s">react-dev:latest</span>
-     <span class="na">container_name</span><span class="pi">:</span> <span class="s">&lt;project_name&gt;-dev_react</span>
-     <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
-     <span class="na">env_file</span><span class="pi">:</span> <span class="s">.env</span>
-     <span class="na">volumes</span><span class="pi">:</span>
-       <span class="pi">-</span> <span class="s">.:/code</span>
-     <span class="na">ports</span><span class="pi">:</span>
-       <span class="pi">-</span> <span class="s">3000:3000</span>
-     <span class="na">stdin_open</span><span class="pi">:</span> <span class="kc">true</span>
-     <span class="na">tty</span><span class="pi">:</span> <span class="kc">true</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-    <p><img src="/img/in-post/dockerized-react-production-and-development/docker_compose_dev.png" alt="docker_compose_dev" /></p>
-  </li>
-  <li>Edit <code class="language-plaintext highlighter-rouge">docker-compose-prod.yml</code> with the following content:
-    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-</pre></td><td class="rouge-code"><pre> <span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.8'</span>
-
- <span class="na">services</span><span class="pi">:</span>
-   <span class="na">react-app</span><span class="pi">:</span>
-     <span class="na">build</span><span class="pi">:</span>
-       <span class="na">context</span><span class="pi">:</span> <span class="s">.</span>
-       <span class="na">dockerfile</span><span class="pi">:</span> <span class="s">./Dockerfile.prod</span>
-     <span class="na">image</span><span class="pi">:</span> <span class="s">react-prod:latest</span>
-     <span class="na">container_name</span><span class="pi">:</span> <span class="s">todo-prod_react</span>
-     <span class="na">restart</span><span class="pi">:</span> <span class="s">always</span>
-     <span class="na">command</span><span class="pi">:</span> <span class="s">serve -s build</span>
-     <span class="na">env_file</span><span class="pi">:</span> <span class="s">.env</span>
-     <span class="na">ports</span><span class="pi">:</span>
-       <span class="pi">-</span> <span class="s">3000:3000</span>
-     <span class="na">stdin_open</span><span class="pi">:</span> <span class="kc">true</span>
-     <span class="na">tty</span><span class="pi">:</span> <span class="kc">true</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-    <p><img src="/img/in-post/dockerized-react-production-and-development/docker_compose_prod.png" alt="docker_compose_prod" /></p>
-  </li>
-  <li>Create <code class="language-plaintext highlighter-rouge">.dockerignore</code> and <code class="language-plaintext highlighter-rouge">.env</code> file
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">touch</span> .dockerignore <span class="o">&amp;&amp;</span> <span class="nb">touch</span> .env
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-    <p><img src="/img/in-post/dockerized-react-production-and-development/dockerignore_env.png" alt="dockerignore_env" /></p>
-  </li>
-  <li>Edit <code class="language-plaintext highlighter-rouge">.dockerignore</code> file:
-    <pre><code class="language-txt"> **/node_modules/**
- Dockerfile.dev
- Dockerfile.prod
- .git
- .gitignore
- .dockerignore
- .env
-</code></pre>
-    <p><img src="/img/in-post/dockerized-react-production-and-development/dockerignore.png" alt="dockerignore" /></p>
   </li>
 </ol>
 
-<h2 id="build-development-environment">Build development environment</h2>
+<p><img src="/img/in-post/sftp-basic-commands/sftp.png" alt="sftp" /></p>
+
+<h2 id="performing-commands">Performing Commands</h2>
+<ul>
+  <li>To perform commands in remote host, type the commands directly into the terminal as usual.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nv">$ </span>sftp&gt; <span class="nb">pwd</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>To perform commands in local computer, type the commands in the terminal after typing “l”
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nv">$ </span>sftp&gt; lpwd
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<p><img src="/img/in-post/sftp-basic-commands/sftpcommand.png" alt="sftp" /></p>
+
+<h2 id="downloading-file-from-remote-to-local">Downloading File From Remote to Local</h2>
 <ol>
-  <li>Navigate to the project root directory containing the <code class="language-plaintext highlighter-rouge">docker-compose-dev.yml</code> file, and run command:
+  <li>Navigate into the remote directory where the file is stored.</li>
+  <li>Navigate into the local directory where you want to store the downloaded file.</li>
+  <li>Type command <code class="language-plaintext highlighter-rouge">get &lt;name of file&gt; .</code>. The first parameter is the name and location of the file in remote host, and the 2nd parameter is the downloaded file path and name in local.
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose-dev.yml up <span class="nt">--build</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>If already container is already built, run container
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose-dev.yml up
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Navigate to <code class="language-plaintext highlighter-rouge">localhost:3000</code> in your browser to view running application in development mode.</li>
-</ol>
-
-<p><img src="/img/in-post/dockerized-react-production-and-development/build_dev.png" alt="build_dev" /></p>
-
-<h2 id="build-production-environment">Build production environment</h2>
-<ol>
-  <li>Navigate to the project root directory containing the <code class="language-plaintext highlighter-rouge">docker-compose-prod.yml</code> file, and run command:
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose-prod.yml up <span class="nt">--build</span>
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>If already container is already built, run container
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>docker-compose <span class="nt">-f</span> docker-compose-prod.yml up
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>Navigate to <code class="language-plaintext highlighter-rouge">localhost:3000</code> in your browser to view running application in production mode.</li>
-</ol>
-
-<h2 id="usefull-code-snippets">Usefull Code Snippets</h2>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-3
-4
-5
-6
-7
-8
-9
-</pre></td><td class="rouge-code"><pre><span class="c"># Check running containers</span>
-<span class="nv">$ </span>docker ps
+</pre></td><td class="rouge-code"><pre> <span class="c"># get -r &lt;remote_path_and_filename&gt; &lt;local_path_and_filename&gt;</span>
+ <span class="nv">$ </span>get samplefile.txt <span class="nb">.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
 
-<span class="c"># Enter running container</span>
-<span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container_name&gt; bash  <span class="c"># if bash</span>
-<span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;container_name&gt; /bin/sh  <span class="c"># if shell</span>
+<ul>
+  <li>Steps 1 and 2 can be skipped, but include the full path and name of the remote file to download, and full path of local directory to store the file.</li>
+  <li>The downloaded file can be renamed in the 2nd parameter by specifying the new name:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nv">$ </span>get samplefile.txt newname.txt
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
 
-<span class="c"># Attach to a container running a server</span>
-<span class="nv">$ </span>docker attach &lt;id_of_container&gt;
-</pre></td></tr></tbody></table></code></pre></div></div>
+<h2 id="downloading-folder-from-remote-to-local">Downloading Folder From Remote to Local</h2>
+<ol>
+  <li>Navigate into the remote directory where the folder is stored.</li>
+  <li>Navigate into the local directory where you want to store the downloaded folder.</li>
+  <li>Type command <code class="language-plaintext highlighter-rouge">get -r &lt;name of folder&gt; .</code>. The first parameter is the name and location of the folder in remote host, and the 2nd parameter is the downloaded folder path and name in local.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="c"># get -r &lt;remote_path&gt; &lt;local_path&gt;</span>
+ <span class="nv">$ </span>get <span class="nt">-r</span> media/ <span class="nb">.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<ul>
+  <li>Steps 1 and 2 can be skipped, but include the full path and name of the remote folder to download, and full path of local directory to store the folder.</li>
+  <li>The downloaded folder can be renamed in the 2nd parameter by specifying the new name:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nv">$ </span>get <span class="nt">-r</span> media/ media-backup/
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="uploading-file-from-local-to-remote">Uploading File From Local to Remote</h2>
+<ol>
+  <li>Navigate into the local directory where the file is stored.</li>
+  <li>Navigate into the remote directory where you want to store the uploaded file.</li>
+  <li>Type command <code class="language-plaintext highlighter-rouge">put &lt;name of file&gt; .</code>. The first parameter is the name and location of the file in local computer, and the 2nd parameter is the uploaded file path and name in remote.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="c"># put &lt;local_path_and_filename&gt; &lt;remote_path_and_filename&gt;</span>
+ <span class="nv">$ </span>put samplefile.txt <span class="nb">.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<ul>
+  <li>Steps 1 and 2 can be skipped, but include the full path and name of the remote file to download, and full path of local directory to store the file.</li>
+  <li>The downloaded file can be renamed in the 2nd parameter by specifying the new name:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nv">$ </span>put samplefile.txt newname.txt
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="uploading-folder-from-local-to-remote">Uploading Folder From Local to Remote</h2>
+<ol>
+  <li>Navigate into the local directory where the folder is stored.</li>
+  <li>Navigate into the remote directory where you want to store the uploaded folder.</li>
+  <li>Type command <code class="language-plaintext highlighter-rouge">put -r &lt;name of folder&gt; .</code>. The first parameter is the name and location of the folder in local computer, and the 2nd parameter is the uploaded folder path and name in remote.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="c"># put -r &lt;local_path_and_foldername&gt; &lt;remote_path_and_foldername&gt;</span>
+ <span class="nv">$ </span>put <span class="nt">-r</span> mediabackup/ <span class="nb">.</span>
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ol>
+
+<ul>
+  <li>Steps 1 and 2 can be skipped, but include the full path and name of the remote file to download, and full path of local directory to store the file.</li>
+  <li>The downloaded file can be renamed in the 2nd parameter by specifying the new name:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>  <span class="nv">$ </span>put <span class="nt">-r</span> mediabackup/ media/
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2023/08/07/migrate-existing-wordpress-to-docker/" data-toggle="tooltip" data-placement="top" title="Migrate Existing Wordpress Website to a Docker Container">
+                        <a href="/2024/01/04/dockerized-react-production-and-development/" data-toggle="tooltip" data-placement="top" title="Dockerized React in Development and Production Settings">
                         Previous<br>
-                        <span>Migrate Existing Wordpress Website to a Docker Container</span>
+                        <span>Dockerized React in Development and Production Settings</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2024/01/24/sftp-basic-commands/" data-toggle="tooltip" data-placement="top" title="Secure File Transfer Protocol (SFTP) Basic Terminal Commands">
-                        Next<br>
-                        <span>Secure File Transfer Protocol (SFTP) Basic Terminal Commands</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
