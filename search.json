@@ -1,7 +1,15 @@
 [
   
     {
-      "title"    : "Creating Scheduled Automatic Daily, Weekly, and Monthly Backup",
+      "title"    : "Injecting Wordpress Admin User Directly from MySQL",
+      "subtitle" : "",
+      "tags"     : "wordpress",
+      "url"      : "/2024/01/26/creating-daily-weekly-monthly-backup/",
+      "date"     : "2024-01-26 00:00:00 +0800"
+    } ,
+  
+    {
+      "title"    : "Creating Scheduled Automatic Daily, Weekly, and Monthly Files Backup using CRON and TAR",
       "subtitle" : "",
       "tags"     : "backup",
       "url"      : "/2024/01/25/creating-daily-weekly-monthly-backup/",
@@ -17,7 +25,7 @@
     } ,
   
     {
-      "title"    : "Dockerized React in Development and Production Settings",
+      "title"    : "Dockerized ReactJS in Development and Production Settings",
       "subtitle" : "",
       "tags"     : "React, Docker",
       "url"      : "/2024/01/04/dockerized-react-production-and-development/",

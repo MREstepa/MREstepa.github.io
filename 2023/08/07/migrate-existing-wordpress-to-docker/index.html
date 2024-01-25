@@ -288,7 +288,7 @@
     <p><img src="/img/in-post/migrate-existing-wordpress-to-docker/copy_wp_contents.png" alt="copy_wp_contents" /></p>
   </li>
   <li>
-    <p>Copy the non-default settings of the existing wordpress <code class="language-plaintext highlighter-rouge">wp-config.php</code> file to the root <code class="language-plaintext highlighter-rouge">wp-config.php</code> (the one we copied from the original wordpress container), excluding database settings. These settings are site-specific, and is necessary to ensure your wordpress site runs perfectly. If all of the settings are default, proceed to the next step.</p>
+    <p>Copy the non-default settings of the wordpress to migrate’s <code class="language-plaintext highlighter-rouge">wp-config.php</code> file to the root <code class="language-plaintext highlighter-rouge">wp-config.php</code> (the one we copied from the original wordpress container), excluding database settings. These settings are site-specific, and is necessary to ensure your wordpress site runs perfectly. If all of the settings are default, proceed to the next step.</p>
   </li>
   <li>Replace the <code class="language-plaintext highlighter-rouge">src/wp-config.php</code> with the <code class="language-plaintext highlighter-rouge">./wp-config.php</code>.
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -353,10 +353,16 @@ mysql <span class="o">&gt;</span> <span class="nv">$ </span>show tables<span cla
 <img src="/img/in-post/migrate-existing-wordpress-to-docker/phpmyadmin_options.png" alt="phpmyadmin_options" /></p>
   </li>
   <li>
-    <p>Click <code class="language-plaintext highlighter-rouge">edit</code> on the row with <code class="language-plaintext highlighter-rouge">siteurl</code> option name, and edit the value from <code class="language-plaintext highlighter-rouge">https://your_website_domain</code> into <code class="language-plaintext highlighter-rouge">http://localhost:your_wordpress_port</code>. 
+    <p>Click <code class="language-plaintext highlighter-rouge">edit</code> on the row with <code class="language-plaintext highlighter-rouge">siteurl</code> and <code class="language-plaintext highlighter-rouge">home</code> option name, and edit the value from <code class="language-plaintext highlighter-rouge">https://your_website_domain</code> into <code class="language-plaintext highlighter-rouge">http://localhost:your_wordpress_port</code>. 
 <img src="/img/in-post/migrate-existing-wordpress-to-docker/phpmyadmin_options_localhost.png" alt="phpmyadmin_options_localhost" /></p>
   </li>
-  <li>Refresh your browser running. You should be able to see your migrated wordpress website. You can login using your live wordpress admin credentials</li>
+  <li>
+    <p>Refresh your browser running. You should be able to see your migrated wordpress website. You can login using your live wordpress admin credentials</p>
+  </li>
+  <li>
+    <p>Navigate to Setttings &gt; Permalinks and remember the selected Permalink Structure.</p>
+  </li>
+  <li>Select any permalink structure, and save. Then re-select the original permalink structure from last step and save.</li>
 </ol>
 
 <h2 id="notes">Notes</h2>
@@ -392,9 +398,9 @@ mysql <span class="o">&gt;</span> <span class="nv">$ </span>show tables<span cla
                     
                     
                     <li class="next">
-                        <a href="/2024/01/04/dockerized-react-production-and-development/" data-toggle="tooltip" data-placement="top" title="Dockerized React in Development and Production Settings">
+                        <a href="/2024/01/04/dockerized-react-production-and-development/" data-toggle="tooltip" data-placement="top" title="Dockerized ReactJS in Development and Production Settings">
                         Next<br>
-                        <span>Dockerized React in Development and Production Settings</span>
+                        <span>Dockerized ReactJS in Development and Production Settings</span>
                         </a>
                     </li>
                     
@@ -439,32 +445,32 @@ mysql <span class="o">&gt;</span> <span class="nv">$ </span>show tables<span cla
         
         
         
-                <a data-sort="0012" 
+                <a data-sort="0013" 
                     href="/archive/?tag=terminal"
                     title="terminal"
                     rel="2">terminal</a>
         
-                <a data-sort="0009" 
+                <a data-sort="0010" 
                     href="/archive/?tag=Docker"
                     title="Docker"
                     rel="5">Docker</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0013" 
                     href="/archive/?tag=Django"
                     title="Django"
                     rel="2">Django</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0013" 
                     href="/archive/?tag=PostgreSQL"
                     title="PostgreSQL"
                     rel="2">PostgreSQL</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0013" 
                     href="/archive/?tag=Wordpress"
                     title="Wordpress"
                     rel="2">Wordpress</a>
         
-                <a data-sort="0012" 
+                <a data-sort="0013" 
                     href="/archive/?tag=djangorestframework"
                     title="djangorestframework"
                     rel="2">djangorestframework</a>

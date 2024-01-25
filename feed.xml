@@ -5,12 +5,71 @@
     <description>A collection of my programming notes for everybody&apos;s reference</description>
     <link>https://mrestepa.com/</link>
     <atom:link href="https://mrestepa.com/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 24 Jan 2024 13:05:35 +0800</pubDate>
-    <lastBuildDate>Wed, 24 Jan 2024 13:05:35 +0800</lastBuildDate>
+    <pubDate>Thu, 25 Jan 2024 14:25:02 +0800</pubDate>
+    <lastBuildDate>Thu, 25 Jan 2024 14:25:02 +0800</lastBuildDate>
     <generator>Jekyll v4.3.2</generator>
     
       <item>
-        <title>Creating Scheduled Automatic Daily, Weekly, and Monthly Backup</title>
+        <title>Injecting Wordpress Admin User Directly from MySQL</title>
+        <description>&lt;p&gt;A guide for injecting wordpress administrator user directly from mysql database without logging into a wordpress admin.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-a-user-directly-from-the-database&quot;&gt;Creating a User Directly from the Database&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;SSH into the site’s host server.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$ su&lt;/code&gt; to enable super user access, then type the super user’s root password.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Enter the mysql shell, and use the project’s database:
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql
+ mysql&amp;gt; SHOW DATABASES&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;# to check the project&apos;s database name&lt;/span&gt;
+ mysql&amp;gt; USE &amp;lt;project_database&amp;gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# do not forget the semicolon&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Show the database tables to determine the table prefix. The default will be “wp_”
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TABLES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Insert your user information through the command:
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_users&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_login&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_email&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_registered&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;your_username&amp;gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;your_password&amp;gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;your_email&amp;gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;date_time_today&amp;gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+    &lt;p&gt;The date time today format should be: yyyy-mm-dd hh:mm:ss&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Search for your username in the Users tables, and take a note of your ID. Then, add your user meta data.
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;     &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;table_prefix&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_usermeta&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;meta_key&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;meta_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;your_user_id&amp;gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;wp_capabilities&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;a:1:{s:13:&quot;administrator&quot;;s:1:&quot;1&quot;;}&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use online tools for wordpress password hashers (such as: https://www.useotools.com/wordpress-password-hash-generator) to generate a hash for your password.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Copy the hashed password, and run the command:
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt; &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;UPDATE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`&amp;lt;table_prefix&amp;gt;_users`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`user_pass`&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;your_password_hash&amp;gt;&apos;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user_login&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&amp;lt;your_username&amp;gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Fri, 26 Jan 2024 00:00:00 +0800</pubDate>
+        <link>https://mrestepa.com/2024/01/26/creating-daily-weekly-monthly-backup/</link>
+        <guid isPermaLink="true">https://mrestepa.com/2024/01/26/creating-daily-weekly-monthly-backup/</guid>
+        
+        <category>wordpress</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Creating Scheduled Automatic Daily, Weekly, and Monthly Files Backup using CRON and TAR</title>
         <description>&lt;p&gt;A guide for creating backup scripts and scheduling them to run daily, weekly, and monthly.&lt;/p&gt;
 
 &lt;h2 id=&quot;creating-backup-scripts&quot;&gt;Creating Backup Scripts&lt;/h2&gt;
@@ -281,7 +340,7 @@
       </item>
     
       <item>
-        <title>Dockerized React in Development and Production Settings</title>
+        <title>Dockerized ReactJS in Development and Production Settings</title>
         <description>&lt;p&gt;This document is a guide for creating a react application in production and development environments inside a docker container.&lt;/p&gt;
 
 &lt;h2 id=&quot;pre-requisites&quot;&gt;Pre-requisites&lt;/h2&gt;
@@ -628,7 +687,7 @@
     &lt;p&gt;&lt;img src=&quot;/img/in-post/migrate-existing-wordpress-to-docker/copy_wp_contents.png&quot; alt=&quot;copy_wp_contents&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Copy the non-default settings of the existing wordpress &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wp-config.php&lt;/code&gt; file to the root &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wp-config.php&lt;/code&gt; (the one we copied from the original wordpress container), excluding database settings. These settings are site-specific, and is necessary to ensure your wordpress site runs perfectly. If all of the settings are default, proceed to the next step.&lt;/p&gt;
+    &lt;p&gt;Copy the non-default settings of the wordpress to migrate’s &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wp-config.php&lt;/code&gt; file to the root &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wp-config.php&lt;/code&gt; (the one we copied from the original wordpress container), excluding database settings. These settings are site-specific, and is necessary to ensure your wordpress site runs perfectly. If all of the settings are default, proceed to the next step.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;Replace the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/wp-config.php&lt;/code&gt; with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./wp-config.php&lt;/code&gt;.
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
@@ -693,10 +752,16 @@ mysql &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot
 &lt;img src=&quot;/img/in-post/migrate-existing-wordpress-to-docker/phpmyadmin_options.png&quot; alt=&quot;phpmyadmin_options&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;Click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edit&lt;/code&gt; on the row with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;siteurl&lt;/code&gt; option name, and edit the value from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://your_website_domain&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:your_wordpress_port&lt;/code&gt;. 
+    &lt;p&gt;Click &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;edit&lt;/code&gt; on the row with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;siteurl&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;home&lt;/code&gt; option name, and edit the value from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://your_website_domain&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:your_wordpress_port&lt;/code&gt;. 
 &lt;img src=&quot;/img/in-post/migrate-existing-wordpress-to-docker/phpmyadmin_options_localhost.png&quot; alt=&quot;phpmyadmin_options_localhost&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
-  &lt;li&gt;Refresh your browser running. You should be able to see your migrated wordpress website. You can login using your live wordpress admin credentials&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Refresh your browser running. You should be able to see your migrated wordpress website. You can login using your live wordpress admin credentials&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Navigate to Setttings &amp;gt; Permalinks and remember the selected Permalink Structure.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Select any permalink structure, and save. Then re-select the original permalink structure from last step and save.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;notes&quot;&gt;Notes&lt;/h2&gt;
@@ -2084,85 +2149,6 @@ COPY &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; /code/
         <category>Windows</category>
         
         <category>Linux</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Customizing MacOS .zsh Terminal</title>
-        <description>&lt;p&gt;This document is a guide for customizing MacOS .zsh terminal.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Download iterm2 from their official site: &lt;a href=&quot;https://iterm2.com/&quot;&gt;https://iterm2.com/&lt;/a&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install ohmyzsh from their official documentation: &lt;a href=&quot;https://ohmyz.sh/#install&quot;&gt;https://ohmyz.sh/#install&lt;/a&gt;.
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sh &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install power level 10k from the official repository: &lt;a href=&quot;https://github.com/romkatv/powerlevel10k#installation&quot;&gt;https://github.com/romkatv/powerlevel10k#installation&lt;/a&gt;.
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/romkatv/powerlevel10k.git &lt;span class=&quot;nv&quot;&gt;$ZSH_CUSTOM&lt;/span&gt;/themes/powerlevel10k
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Open the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt; file using your text editor of choice, and edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ZSH_THEME&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;powerlevel10k/powerlevel10k&lt;/code&gt;. Save the changes.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Restart the terminal by quitting and and reopening.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Configure the themes to your liking.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This is the configuration of my terminal:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;font: &lt;span class=&quot;nb&quot;&gt;yes&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt style: rainbow
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; character &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;: unicode
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; show current &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt;: No
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt separator: angled
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt heads: sharp
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt tails: flat
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt height: two lines
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt connection: disconnected
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt frame: no frame
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt spacing: compact
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; icons: few icons
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; prompt flow: concise
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;transient prompt: no
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; instant prompt mode: verbose
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; apply changes to ~/.zshrc: &lt;span class=&quot;nb&quot;&gt;yes&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To change color scheme, downloaded color scheme reference from: &lt;a href=&quot;https://github.com/QuentinWatt/dark-flat-iterm-colors&quot;&gt;https://github.com/QuentinWatt/dark-flat-iterm-colors&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Then, open .p10.zsh and search for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POWERLEVEL9K_SHORTEN_STRATEGY&lt;/code&gt;. Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;truncate_to_unique&lt;/code&gt; into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;truncate_to_last&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Finally, Edit the profile window preference to 110x20&lt;/p&gt;
-
-&lt;p&gt;Reference: &lt;a href=&quot;https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt&quot;&gt;https://stackoverflow.com/questions/61176257/customizing-powerleve10k-prompt&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Thu, 19 Aug 2021 00:00:00 +0800</pubDate>
-        <link>https://mrestepa.com/2021/08/19/customize-zsh-terminal/</link>
-        <guid isPermaLink="true">https://mrestepa.com/2021/08/19/customize-zsh-terminal/</guid>
-        
-        <category>zsh</category>
         
         
       </item>
