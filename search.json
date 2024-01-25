@@ -1,10 +1,10 @@
 [
   
     {
-      "title"    : "Injecting Wordpress Admin User Directly from MySQL",
+      "title"    : "Creating Wordpress Admin User Directly from MySQL",
       "subtitle" : "",
       "tags"     : "wordpress",
-      "url"      : "/2024/01/26/creating-daily-weekly-monthly-backup/",
+      "url"      : "/2024/01/26/creating-wordpress-user-from-db/",
       "date"     : "2024-01-26 00:00:00 +0800"
     } ,
   
