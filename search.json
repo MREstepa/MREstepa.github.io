@@ -1,11 +1,11 @@
 [
   
     {
-      "title"    : "DjangoRestFramework (DRF) User Registration, Login, Logout, and Password Reset with Djoser",
+      "title"    : "Installing Webmin on Ubuntu 22.10",
       "subtitle" : "",
-      "tags"     : "Django, djangorestframework",
-      "url"      : "/2024/02/20/django-drf-djoser-authentication/",
-      "date"     : "2024-02-20 00:00:00 +0800"
+      "tags"     : "Ubuntu",
+      "url"      : "/2024/07/18/install-webmin-in-ubuntu/",
+      "date"     : "2024-07-18 00:00:00 +0800"
     } ,
   
     {

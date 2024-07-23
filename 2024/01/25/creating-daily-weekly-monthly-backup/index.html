@@ -241,7 +241,17 @@
   <li>Type the following code:
     <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre> <span class="nb">tar</span> <span class="nt">-zcf</span> &lt;store_backup_dir&gt;/&lt;backup_file_name&gt;-<span class="si">$(</span><span class="nb">date</span> +%Y%m%d<span class="si">)</span>.tar.gz <span class="nt">-C</span> &lt;file_or_folder_dir&gt; &lt;file_or_folder_to_backup&gt;
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre> <span class="c"># LINUX:</span>
+ <span class="nb">tar</span> <span class="nt">-zcf</span> &lt;store_backup_dir&gt;/&lt;backup_file_name&gt;-<span class="si">$(</span><span class="nb">date</span> +%Y%m%d<span class="si">)</span>.tar.gz <span class="nt">-C</span> &lt;file_or_folder_dir&gt; &lt;file_or_folder_to_backup&gt;
+
+ <span class="c"># BSD:</span>
+ <span class="nb">tar</span> <span class="nt">-zcf</span> &lt;store_backup_dir&gt;/&lt;backup_file_name&gt;-<span class="sb">`</span><span class="nb">date</span> +%Y%m%d<span class="sb">`</span>.tar.gz <span class="nt">-C</span> &lt;file_or_folder_dir&gt; &lt;file_or_folder_to_backup&gt;    
+
  find &lt;store_backup_dir&gt;/<span class="k">*</span> <span class="nt">-mtime</span> +&lt;num_of_days&gt; <span class="nt">-delete</span>
 </pre></td></tr></tbody></table></code></pre></div>    </div>
     <p>The first line has the commands:</p>
@@ -406,15 +416,10 @@
                     title="Docker"
                     rel="5">Docker</a>
         
-                <a data-sort="0013" 
+                <a data-sort="0014" 
                     href="/archive/?tag=Django"
                     title="Django"
-                    rel="3">Django</a>
-        
-                <a data-sort="0013" 
-                    href="/archive/?tag=djangorestframework"
-                    title="djangorestframework"
-                    rel="3">djangorestframework</a>
+                    rel="2">Django</a>
         
                 <a data-sort="0014" 
                     href="/archive/?tag=PostgreSQL"
@@ -422,9 +427,19 @@
                     rel="2">PostgreSQL</a>
         
                 <a data-sort="0014" 
+                    href="/archive/?tag=Ubuntu"
+                    title="Ubuntu"
+                    rel="2">Ubuntu</a>
+        
+                <a data-sort="0014" 
                     href="/archive/?tag=Wordpress"
                     title="Wordpress"
                     rel="2">Wordpress</a>
+        
+                <a data-sort="0014" 
+                    href="/archive/?tag=djangorestframework"
+                    title="djangorestframework"
+                    rel="2">djangorestframework</a>
     </div>
 </section>
 

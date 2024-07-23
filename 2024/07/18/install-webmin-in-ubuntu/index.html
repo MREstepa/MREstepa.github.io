@@ -11,32 +11,30 @@
     <meta name="theme-color" content="#000000">
 
     <meta property="og:title"
-        content="Python Virtual Environment Basic Commands - Programming Notes">
+        content="Installing Webmin on Ubuntu 22.10 - Programming Notes">
     
     <meta property="og:type" content="article">
-    <meta property="og:description" content="This document is a straightforward guide for python virtualenvironment basic commands.
+    <meta property="og:description" content="A guide for installing Webmin on Ubuntu 22.10 from the official documentation: https://webmin.com/download/.
 ">
     
-    <meta property="article:published_time" content=" 2020-10-14T00:00:00Z">
+    <meta property="article:published_time" content=" 2024-07-18T00:00:00Z">
     
     
     <meta property="article:author" content="Ray">
     
     
-    <meta property="article:tag" content="Python">
-    
-    <meta property="article:tag" content="venv">
+    <meta property="article:tag" content="Ubuntu">
     
     
     <meta property="og:image" content="https://mrestepa.comhttps://github.com/mrestepa.png">
-    <meta property="og:url" content="https://mrestepa.com/2020/10/14/python-venv-basic-commands/">
+    <meta property="og:url" content="https://mrestepa.com/2024/07/18/install-webmin-in-ubuntu/">
     <meta property="og:site_name" content="Programming Notes">
 
-    <title>Python Virtual Environment Basic Commands - Programming Notes</title>
+    <title>Installing Webmin on Ubuntu 22.10 - Programming Notes</title>
 
     
     <link rel="shortcut icon" href="/img/favicon.ico">
-    <link rel="canonical" href="https://mrestepa.com/2020/10/14/python-venv-basic-commands/">
+    <link rel="canonical" href="https://mrestepa.com/2024/07/18/install-webmin-in-ubuntu/">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/custom.min.css">
 
@@ -184,15 +182,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/archive/?tag=Python" title="Python">Python</a>
-                        
-                        <a class="tag" href="/archive/?tag=venv" title="venv">venv</a>
+                        <a class="tag" href="/archive/?tag=Ubuntu" title="Ubuntu">Ubuntu</a>
                         
                     </div>
-                    <h1>Python Virtual Environment Basic Commands</h1>
+                    <h1>Installing Webmin on Ubuntu 22.10</h1>
                     
                     <h2 class="subheading"></h2>
-                    <span class="meta">Posted by Ray on October 14, 2020</span>
+                    <span class="meta">Posted by Ray on July 18, 2024</span>
                 </div>
             </div>
         </div>
@@ -216,149 +212,63 @@
 
                 
 
-				<p>This document is a straightforward guide for python virtualenvironment basic commands.</p>
+				<p>A guide for installing Webmin on Ubuntu 22.10 from the official documentation: https://webmin.com/download/.</p>
 
-<h1 id="virtual-environments">Virtual Environments</h1>
-
-<h3 id="create-a-virtual-environment">Create a virtual environment</h3>
+<h2 id="installing-webmin">Installing webmin</h2>
 <ol>
   <li>
-    <p>Change directory into desired folder where venv will be placed.</p>
+    <p>SSH server and make sure you have super user access (sudo) or root.</p>
+  </li>
+  <li>
+    <p>Type <code class="language-plaintext highlighter-rouge">$ lsb_release -a</code> to check your Ubuntu version.</p>
+  </li>
+  <li>
+    <p>Create a <code class="language-plaintext highlighter-rouge">webmin</code> directory and cd into that folder to store the setup script.</p>
+  </li>
+  <li>
+    <p>Type the command below to download the setup script.</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> $ cd ../my_directory
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span>curl setup-repos.sh https:// raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh
 </pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
-    <p>Create a virtual environment.</p>
+    <p>Type <code class="language-plaintext highlighter-rouge">ls -la</code> to check if the script can be executed. If not, type the command</p>
 
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
-</pre></td><td class="rouge-code"><pre> python[version] -m venv &lt;venv_name&gt;
- $ python3 -m venv venv
+</pre></td><td class="rouge-code"><pre> <span class="nv">$ </span><span class="nb">chmod </span>744 setup-repos.sh  <span class="c"># change file permissions</span>
+ <span class="nv">$ </span><span class="nb">ls</span> <span class="nt">-la</span>  <span class="c"># check if file is now executable</span>
 </pre></td></tr></tbody></table></code></pre></div>    </div>
   </li>
   <li>
-    <p>Activate the virtual environment created.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre> $ cd venv
- $ source bin/activate
-</pre></td></tr></tbody></table></code></pre></div>    </div>
+    <p>Execute script <code class="language-plaintext highlighter-rouge">$ sh setup-repos.sh</code></p>
+  </li>
+  <li>
+    <p>Check firewall if port 10000 is open with the command <code class="language-plaintext highlighter-rouge">ufw status</code>. If it is not open, allow port 10000 through <code class="language-plaintext highlighter-rouge">ufw allow 10000/tcp</code></p>
+  </li>
+  <li>
+    <p>Install webmin with the following command: <code class="language-plaintext highlighter-rouge">apt-get install --install-recommends webmin</code></p>
+  </li>
+  <li>
+    <p>Navigate to https://<your_ip>:10000 in a browser to access webmin. You should be able to login using the account you used for the SSH.</your_ip></p>
   </li>
 </ol>
 
-<h3 id="delete-all-packages-installed-by-pip-inside-the-virtual-environment">Delete all packages installed by pip inside the virtual environment</h3>
-
-<ol>
-  <li>
-    <p>Activate your virtual environment.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre> $ cd ../venv
- $ source bin/activate
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Delete all packages.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> $ pip uninstall -y -r &lt;(pip freeze)
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Deactivae the virtual environment.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> $ deactivate
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-</ol>
-
-<h3 id="installing-packages-inside-virtual-environment">Installing packages inside virtual environment</h3>
-
-<ol>
-  <li>
-    <p>Activate your virtual environment.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre> $ cd ../venv
- $ source bin/activate
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Install desired package.</p>
-    <ul>
-      <li>Installing individual packages
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>  $ pip install my_package
-</pre></td></tr></tbody></table></code></pre></div>        </div>
-      </li>
-      <li>Installing requirements.txt
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>  $ pip install -r requirements.txt
-</pre></td></tr></tbody></table></code></pre></div>        </div>
-      </li>
-    </ul>
-  </li>
-</ol>
-
-<h3 id="determine-if-you-are-inside-a-virtual-environment">Determine if you are inside a virtual environment</h3>
-
-<ol>
-  <li>
-    <p>Activate your virtual environment.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre> $ cd ../venv
- $ source bin/activate
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Run python.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> $ python3
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-  </li>
-  <li>
-    <p>Import os and get virtual env from os.</p>
-
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre> $ &gt;&gt;&gt; import os
- $ &gt;&gt;&gt; os.getenv('VIRTUAL_ENV')
-</pre></td></tr></tbody></table></code></pre></div>    </div>
-    <ul>
-      <li>If the terminal displays a path, you are inside a virtual env.</li>
-      <li>If the terminal displays nothing, you are not inside a virtual env.</li>
-    </ul>
-  </li>
-</ol>
-
+<p><img src="/img/in-post/install-webmin-in-ubuntu/setup_sh.png" alt="script_setup" />
+<img src="/img/in-post/install-webmin-in-ubuntu/install.png" alt="installing_webmin" /></p>
 
 
                 <hr style="visibility: hidden;">
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/09/19/create-bash-script/" data-toggle="tooltip" data-placement="top" title="How To Create a Bash Script in MacOS/Linux">
+                        <a href="/2024/01/26/creating-wordpress-user-from-db/" data-toggle="tooltip" data-placement="top" title="Creating Wordpress Admin User Directly from MySQL">
                         Previous<br>
-                        <span>How To Create a Bash Script in MacOS/Linux</span>
+                        <span>Creating Wordpress Admin User Directly from MySQL</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/11/23/cicd-pipeline-with-aws-bitbucket/" data-toggle="tooltip" data-placement="top" title="Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail & Bitbucket">
-                        Next<br>
-                        <span>Step by Step Walkthrough: Creating CI/CD Pipeline with AWS Lightsail & Bitbucket</span>
-                        </a>
-                    </li>
                     
                 </ul>
                 <hr style="visibility: hidden;">
